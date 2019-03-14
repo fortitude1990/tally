@@ -29,7 +29,7 @@
 width = "25%" alt = "记录一笔"/>
 </div>
 
-## Contact
+## 关于作者
 
 * Auth  : zhijing.li 
 * Email : lizhijing1209@163.com 
