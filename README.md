@@ -23,16 +23,18 @@
 * [代理函数中使用switch，只写一个case下，导致代理函数偶尔无响应](https://www.jianshu.com/p/cde8150f4b2a)
 
 ## 图样
+
 <div>
 <img style="float:left margin:5" src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG2.jpeg" 
 width = "25%" alt = "记录一笔"/>
 </div>
 
 
-Auth  : zhijing.li
-Email : lizhijing1209@163.com
-Tel   : 18531240875
-QQ    : 2631578708
+
+* Auth  : zhijing.li 
+* Email : lizhijing1209@163.com 
+* Tel   : 18531240875 
+* QQ    : 2631578708 
 
 
 
