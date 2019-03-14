@@ -20,7 +20,7 @@
 * 动画效果的调试
 
 ## 奇葩问题
-* 代理函数中使用switch，只写一个case下，导致代理函数偶尔无响应
+* [代理函数中使用switch，只写一个case下，导致代理函数偶尔无响应](https://www.jianshu.com/p/cde8150f4b2a)
 
 ## 图样
 <div>
