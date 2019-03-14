@@ -24,7 +24,7 @@ swift
 
 ## 图样
 <div>
-<img style="float:left margin:5" src = "https://github.com/fortitude1990/unsapp/blob/master/images/WechatIMG4.jpeg" 
+<img style="float:left margin:5" src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG2.jpeg" 
 width = "25%" alt = "记录一笔"/>
 </div>
 
