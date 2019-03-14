@@ -4,7 +4,7 @@
 最近在使用网易有钱APP的时候，感觉添加一笔账单的页面动效挺不错的，所以就模仿着写了一下这个页面的动画效果
 
 ## 语言
-swift
+[Swift](http://www.swift51.com/swift4.0/)
 
 ## 第三方框架
 [SnapKit](https://github.com/SnapKit/SnapKit)
