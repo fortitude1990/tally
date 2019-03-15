@@ -13,8 +13,6 @@
 * 输入框处于FirstResponder下，如何不弹出键盘
 * 如何让UICollectionView横向翻页滑动
 * 手指在UICollectionView上，self.view页面可以进行流畅的竖向滑动
-  + UICollectionView的touchesMoved无响应
-  + UICollectionView上的手势冲突
 * 如何获取系统键盘的实例
 * 系统键盘和自定义键盘之间的流畅切换
 * 动画效果的调试
