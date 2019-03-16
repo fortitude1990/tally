@@ -10,5 +10,6 @@ target 'tally' do
   # Pods for tally
 
  pod 'SnapKit', '~> 4.0.0'
+ pod 'SQLite.swift'
 
 end

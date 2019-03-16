@@ -18,6 +18,14 @@ class TodayView: UIView {
     }
     */
 
+    
+     // MARK: - Property
+
+    var titleLabel: UILabel?
+
+    
+     // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI(frame: frame)
@@ -33,7 +41,7 @@ class TodayView: UIView {
         let view: UIView = UIView.init()
         self.addSubview(view)
         view.snp.makeConstraints { (make) in
-            make.width.equalTo(50)
+//            make.width.equalTo(50)
             make.height.equalTo(20)
             make.centerX.equalTo(self)
             make.centerY.equalTo(self)
@@ -52,14 +60,19 @@ class TodayView: UIView {
         let titleLabel: UILabel = UILabel.init()
         titleLabel.font = UIFont.systemFont(ofSize: 12)
         titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "今日"
+        titleLabel.text = "今天"
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.right.top.bottom.equalTo(0)
-            make.left.equalTo(aImageView.snp.right)
+            make.left.equalTo(aImageView.snp.right).offset(5)
         }
+
+        self.titleLabel = titleLabel
         
-        
+    }
+    
+    func setTitleLabelText(_ text: String) -> Void {
+        self.titleLabel?.text = text
     }
     
     

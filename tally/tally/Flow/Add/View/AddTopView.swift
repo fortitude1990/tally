@@ -25,6 +25,7 @@ class AddTopView: UIView {
     var backBtnHandler: CommonBlock!
     var segmentHandler: SegmentCallbackBlock!
     var aBackBtn: UIButton!
+    var segment: UISegmentedControl?
 
     
     // MARK: - 初始化
@@ -72,6 +73,7 @@ class AddTopView: UIView {
             make.width.equalTo(140)
             make.height.equalTo(25)
         }
+        self.segment = segment
         
         let bottomLine: UIView = UIView.init()
         bottomLine.backgroundColor = UIColor.init(red: 0.7, green: 0.7, blue: 0.7, alpha: 0.6)
@@ -117,6 +119,12 @@ class AddTopView: UIView {
         }
         
         return super.hitTest(point, with: event)
+    }
+    
+    func setSegmentIndex(index: Int) -> Void {
+        if index < self.segment?.numberOfSegments ?? 2 {
+            self.segment?.selectedSegmentIndex = index
+        }
     }
     
 }

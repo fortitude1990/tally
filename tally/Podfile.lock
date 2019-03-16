@@ -1,16 +1,22 @@
 PODS:
   - SnapKit (4.0.1)
+  - SQLite.swift (0.11.5):
+    - SQLite.swift/standard (= 0.11.5)
+  - SQLite.swift/standard (0.11.5)
 
 DEPENDENCIES:
   - SnapKit (~> 4.0.0)
+  - SQLite.swift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - SnapKit
+    - SQLite.swift
 
 SPEC CHECKSUMS:
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
 
-PODFILE CHECKSUM: f007e036806e315e102d5559e1740ebd594a7182
+PODFILE CHECKSUM: a48adbe0d7a217175473af0f19ef802baca966d5
 
 COCOAPODS: 1.5.2

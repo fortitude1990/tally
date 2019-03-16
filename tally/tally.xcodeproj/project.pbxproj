@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1323E3CD2236305A008AE30E /* UICollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1323E3CC2236305A008AE30E /* UICollectionExtension.swift */; };
 		1323E3D122366C54008AE30E /* ConsumeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13838E20223259F3007934E0 /* ConsumeTypeView.swift */; };
 		133E7BC3222F96B3004D79CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133E7BC2222F96B3004D79CC /* AppDelegate.swift */; };
 		133E7BC5222F96B3004D79CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133E7BC4222F96B3004D79CC /* ViewController.swift */; };
@@ -27,15 +26,19 @@
 		13838E1E22321255007934E0 /* Add_InputAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13838E1D22321255007934E0 /* Add_InputAmountView.swift */; };
 		13838E2522326895007934E0 /* ConsumeTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13838E2422326895007934E0 /* ConsumeTypeCollectionViewCell.swift */; };
 		13838E292232733B007934E0 /* ConsumeTypeUICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13838E282232733B007934E0 /* ConsumeTypeUICollectionViewFlowLayout.swift */; };
+		1392E50B223B9969007A4C59 /* ConsumeType.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1392E50A223B9969007A4C59 /* ConsumeType.plist */; };
+		1392E50E223BAA31007A4C59 /* ConsumeTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1392E50D223BAA31007A4C59 /* ConsumeTypeModel.swift */; };
+		1392E510223BAE17007A4C59 /* TallyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1392E50F223BAE17007A4C59 /* TallyModel.swift */; };
 		13B60E512238FA1300A72CBC /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B60E502238FA1300A72CBC /* SelectDateView.swift */; };
 		13B60E542238FD5A00A72CBC /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B60E532238FD5A00A72CBC /* TodayView.swift */; };
 		13B60E582239117300A72CBC /* RemarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B60E5622390B4500A72CBC /* RemarkView.swift */; };
+		13DD2DA5223A5187008F9B6B /* DateShownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD2DA4223A5187008F9B6B /* DateShownView.swift */; };
+		13E68FAA223C83150060B106 /* IncomeType.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13E68FA9223C83150060B106 /* IncomeType.plist */; };
 		13F1673E22377CD20018E908 /* MyBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1673D22377CD20018E908 /* MyBtn.swift */; };
 		5578B761E51E9BBDBF38D452 /* Pods_tally.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26979D66EE8C53092435A99 /* Pods_tally.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1323E3CC2236305A008AE30E /* UICollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionExtension.swift; sourceTree = "<group>"; };
 		133E7BBF222F96B3004D79CC /* tally.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tally.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		133E7BC2222F96B3004D79CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		133E7BC4222F96B3004D79CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,9 +60,14 @@
 		13838E20223259F3007934E0 /* ConsumeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeTypeView.swift; sourceTree = "<group>"; };
 		13838E2422326895007934E0 /* ConsumeTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		13838E282232733B007934E0 /* ConsumeTypeUICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeTypeUICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		1392E50A223B9969007A4C59 /* ConsumeType.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ConsumeType.plist; sourceTree = "<group>"; };
+		1392E50D223BAA31007A4C59 /* ConsumeTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeTypeModel.swift; sourceTree = "<group>"; };
+		1392E50F223BAE17007A4C59 /* TallyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallyModel.swift; sourceTree = "<group>"; };
 		13B60E502238FA1300A72CBC /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		13B60E532238FD5A00A72CBC /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		13B60E5622390B4500A72CBC /* RemarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemarkView.swift; sourceTree = "<group>"; };
+		13DD2DA4223A5187008F9B6B /* DateShownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateShownView.swift; sourceTree = "<group>"; };
+		13E68FA9223C83150060B106 /* IncomeType.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IncomeType.plist; sourceTree = "<group>"; };
 		13F1673D22377CD20018E908 /* MyBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBtn.swift; sourceTree = "<group>"; };
 		19588EB29233DC090F335142 /* Pods-tally.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tally.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tally/Pods-tally.debug.xcconfig"; sourceTree = "<group>"; };
 		473828AB58C467331F7C001C /* Pods-tally.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tally.release.xcconfig"; path = "Pods/Target Support Files/Pods-tally/Pods-tally.release.xcconfig"; sourceTree = "<group>"; };
@@ -82,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				134613592230F1F900E9136E /* UIColorExtension.swift */,
-				1323E3CC2236305A008AE30E /* UICollectionExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -116,6 +123,7 @@
 		133E7BC1222F96B3004D79CC /* tally */ = {
 			isa = PBXGroup;
 			children = (
+				1392E509223B993D007A4C59 /* Resource */,
 				133E7BE0222F9EE0004D79CC /* Common */,
 				133E7BD8222F9B4B004D79CC /* Flow */,
 				133E7BD7222F96F9004D79CC /* AppDelegate */,
@@ -175,6 +183,7 @@
 		133E7BE0222F9EE0004D79CC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1392E511223BAE90007A4C59 /* Model */,
 				13F1673C22377CB10018E908 /* View */,
 				1323E3CA22362FEB008AE30E /* Global */,
 				1323E3C922362FE0008AE30E /* Extension */,
@@ -201,6 +210,7 @@
 		134613502230B73100E9136E /* Add */ = {
 			isa = PBXGroup;
 			children = (
+				1392E50C223BAA0D007A4C59 /* Modle */,
 				134613542230B8AA00E9136E /* View */,
 				134613512230B73A00E9136E /* Controller */,
 			);
@@ -247,11 +257,37 @@
 			path = Keyboard;
 			sourceTree = "<group>";
 		};
+		1392E509223B993D007A4C59 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1392E50A223B9969007A4C59 /* ConsumeType.plist */,
+				13E68FA9223C83150060B106 /* IncomeType.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		1392E50C223BAA0D007A4C59 /* Modle */ = {
+			isa = PBXGroup;
+			children = (
+				1392E50D223BAA31007A4C59 /* ConsumeTypeModel.swift */,
+			);
+			path = Modle;
+			sourceTree = "<group>";
+		};
+		1392E511223BAE90007A4C59 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1392E50F223BAE17007A4C59 /* TallyModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		13B60E4F2238F9B200A72CBC /* DateSelect */ = {
 			isa = PBXGroup;
 			children = (
 				13B60E502238FA1300A72CBC /* SelectDateView.swift */,
 				13B60E532238FD5A00A72CBC /* TodayView.swift */,
+				13DD2DA4223A5187008F9B6B /* DateShownView.swift */,
 			);
 			path = DateSelect;
 			sourceTree = "<group>";
@@ -351,6 +387,8 @@
 			files = (
 				133E7BD0222F96B4004D79CC /* LaunchScreen.storyboard in Resources */,
 				133E7BCD222F96B4004D79CC /* Assets.xcassets in Resources */,
+				1392E50B223B9969007A4C59 /* ConsumeType.plist in Resources */,
+				13E68FAA223C83150060B106 /* IncomeType.plist in Resources */,
 				133E7BC8222F96B3004D79CC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,10 +421,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-tally/Pods-tally-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,14 +443,15 @@
 			files = (
 				13B60E582239117300A72CBC /* RemarkView.swift in Sources */,
 				1323E3D122366C54008AE30E /* ConsumeTypeView.swift in Sources */,
+				1392E510223BAE17007A4C59 /* TallyModel.swift in Sources */,
 				133E7BDC222F9BED004D79CC /* TabBarViewController.swift in Sources */,
 				133E7BDF222F9D82004D79CC /* CustomTabBar.swift in Sources */,
 				13B60E512238FA1300A72CBC /* SelectDateView.swift in Sources */,
-				1323E3CD2236305A008AE30E /* UICollectionExtension.swift in Sources */,
 				134613532230B75000E9136E /* AddViewController.swift in Sources */,
 				133E7BC5222F96B3004D79CC /* ViewController.swift in Sources */,
 				1346135C223100A600E9136E /* KeyboardView.swift in Sources */,
 				13F1673E22377CD20018E908 /* MyBtn.swift in Sources */,
+				13DD2DA5223A5187008F9B6B /* DateShownView.swift in Sources */,
 				134613602231061800E9136E /* Key.swift in Sources */,
 				133E7BCB222F96B3004D79CC /* tally.xcdatamodeld in Sources */,
 				133E7BE4222FA81A004D79CC /* Common.swift in Sources */,
@@ -419,6 +460,7 @@
 				13838E1E22321255007934E0 /* Add_InputAmountView.swift in Sources */,
 				133E7BC3222F96B3004D79CC /* AppDelegate.swift in Sources */,
 				13838E292232733B007934E0 /* ConsumeTypeUICollectionViewFlowLayout.swift in Sources */,
+				1392E50E223BAA31007A4C59 /* ConsumeTypeModel.swift in Sources */,
 				134613562230C38D00E9136E /* AddTopView.swift in Sources */,
 				13B60E542238FD5A00A72CBC /* TodayView.swift in Sources */,
 				13838E2522326895007934E0 /* ConsumeTypeCollectionViewCell.swift in Sources */,

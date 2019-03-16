@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardViewDelegate, RemarkViewDelegate {
+class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardViewDelegate, RemarkViewDelegate, DateShownViewDelegate, SelectDateViewDelegate, Add_InputAmountViewDelegate {
 
     enum MovementSpaceType {
         case increasingY
@@ -17,12 +17,24 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
     
      // MARK: - Property
     
+    var tallyModel: TallyModel?
+    var spendingModel: ConsumeTypeModel?
+    var incomeModel: ConsumeTypeModel?
+    
     var consumeTypeView: ConsumeTypeView?
     var topView: AddTopView?
     var keyboardView: KeyboardView?
     var inputAmountView: Add_InputAmountView?
     var remarkView: RemarkView?
     var isSwitchFirstResponder: Bool = true
+    var selectDateView: SelectDateView?
+    
+    
+    lazy var datePicker: DateShownView = {
+        let dateShown: DateShownView = DateShownView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: autoScaleNomarl(value: 220)))
+        dateShown.delegate = self
+        return dateShown
+    }()
     
      // MARK: - LifeCycle
     
@@ -31,6 +43,7 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
 
         // Do any additional setup after loading the view.
         setupUI()
+        loadData()
     }
     
 
@@ -65,16 +78,24 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
         let topView:AddTopView = AddTopView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: kNavigationHeight))
         self.navigationController?.view.addSubview(topView)
         topView.backBtnCallback {
+            self.isSwitchFirstResponder = false
             self.dismiss(animated: true, completion: {
                 
             })
         }
         topView.segmentCallback { (index: Int) in
             
+            if index == 0{
+              self.consumeTypeView?.loadData(aConsumeType: self.spendingModel, talleyType: TallyModel.TalleyType.spending)
+            }else{
+              self.consumeTypeView?.loadData(aConsumeType: self.incomeModel, talleyType: TallyModel.TalleyType.income)
+            }
+ 
         }
         self.topView = topView
         
         let inputAmountView: Add_InputAmountView = Add_InputAmountView.init(frame: CGRect.init(x: 0, y: topView.frame.maxY, width: kScreenWidth, height: 70))
+        inputAmountView.delegate = self
         self.view.addSubview(inputAmountView)
         self.inputAmountView = inputAmountView
         
@@ -88,23 +109,73 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
         self.view.addSubview(consumeTypeView)
         self.consumeTypeView = consumeTypeView
         
-        let selectDateView: SelectDateView = SelectDateView.init(frame: CGRect.init(x: 10, y: consumeTypeView.frame.maxY + 5, width: 60, height: 30))
+        let selectDateView: SelectDateView = SelectDateView.init(frame: CGRect.init(x: 10, y: consumeTypeView.frame.maxY + 5, width: 85, height: 30))
+        selectDateView.delegate = self
         self.view.addSubview(selectDateView)
+        self.selectDateView = selectDateView
         
         let remarkView: RemarkView = RemarkView.init(frame: CGRect.init(x: selectDateView.frame.maxX + 10, y: consumeTypeView.frame.maxY + 5, width: kScreenWidth - selectDateView.frame.maxX - 10 - 10, height: 30))
         remarkView.delegate = self
         self.view.addSubview(remarkView)
         self.remarkView = remarkView
         
-        let keyboard: KeyboardView = KeyboardView.init(frame: CGRect.init(x: 0, y: kScreenHeight - 220 - kBottomSafeAreaHeight, width: kScreenWidth, height: 220))
+        let keyboardHeight: CGFloat = autoScaleNomarl(value: 220)
+        let keyboard: KeyboardView = KeyboardView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: keyboardHeight))
         keyboard.delegate = self
-//        self.navigationController?.view.addSubview(keyboard)
         self.keyboardView = keyboard
-        self.inputAmountView?.setInputView(aInputView: keyboard)
+
+        let inputView: UIView = UIView.init(frame: CGRect.init(x: 0, y: kScreenHeight - keyboardHeight - kBottomSafeAreaHeight, width: kScreenWidth, height: keyboardHeight + kBottomSafeAreaHeight))
+        inputView.addSubview(keyboard)
+
+        let safeArea: UIView = UIView.init(frame: CGRect.init(x: 0, y: keyboardHeight, width: kScreenWidth, height: kBottomSafeAreaHeight))
+        inputView.addSubview(safeArea)
+
+        self.inputAmountView?.setInputView(aInputView: inputView)
         
         
     }
     
+     // MARK: - LoadData
+    
+    func loadData() -> Void {
+        
+        if self.tallyModel == nil {
+            
+            self.tallyModel = TallyModel.init()
+            self.tallyModel?.amount = "0.00"
+            
+            let format: DateFormatter = DateFormatter.init()
+            format.dateFormat = "yyyy/MM/dd"
+            let nowDate: Date = Date.init()
+            let nowDateString = format.string(from: nowDate)
+            
+            self.tallyModel?.date = nowDateString
+            
+            self.consumeTypeView?.loadData(aConsumeType: nil, talleyType: TallyModel.TalleyType.spending)
+            
+            
+        }else{
+            
+            self.consumeTypeView?.loadData(aConsumeType: self.tallyModel?.consumeType, talleyType: self.tallyModel?.consumeType?.tallyType ?? TallyModel.TalleyType.spending)
+            
+            if self.tallyModel?.consumeType?.tallyType == TallyModel.TalleyType.income{
+                self.topView?.setSegmentIndex(index: 1)
+                self.incomeModel = self.tallyModel?.consumeType
+            }else{
+                self.spendingModel = self.tallyModel?.consumeType
+            }
+            
+            self.inputAmountView?.setAmount(amount: self.tallyModel?.amount ?? "0.00")
+            
+            let format: DateFormatter = DateFormatter.init()
+            format.dateFormat = "yyyyMMdd"
+            let nowDate: Date = format.date(from: self.tallyModel?.date ?? "") ?? Date.init()
+            format.dateFormat = "yyyy/MM/dd"
+            let nowDateString = format.string(from: nowDate)
+            self.selectDateView?.setTitle(title: nowDateString)
+        }
+        
+    }
     
     
      // MARK: - ConsumeTypeViewDelegate
@@ -124,6 +195,18 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
         default: break
             
         }
+        
+    }
+    
+    func consumeTypeView(didSelected consumeType: ConsumeTypeModel) {
+        
+        if consumeType.tallyType == TallyModel.TalleyType.spending{
+            self.spendingModel = consumeType
+        }else{
+            self.incomeModel = consumeType
+        }
+        
+        self.tallyModel?.consumeType = consumeType
         
     }
     
@@ -147,12 +230,12 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
             topViewFrame.origin.y = frame.origin.y
             self.topView?.frame = topViewFrame
             
-            let hostView: UIView = getHostView()
+            let hostView: UIView = movementBottomView()
             var keyboardFrame: CGRect = hostView.frame
             if frame.origin.y > kScreenHeight - keyboardFrame.height - 150   {
                 keyboardFrame.origin.y = frame.origin.y + 150
             }else{
-                keyboardFrame.origin.y = kScreenHeight - keyboardFrame.height - kBottomSafeAreaHeight
+                keyboardFrame.origin.y = kScreenHeight - keyboardFrame.height
             }
             hostView.frame  = keyboardFrame
 
@@ -190,13 +273,9 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
         topViewFrame.origin = CGPoint.zero
         self.topView?.frame = topViewFrame
         
-//        var keyboardFrame: CGRect = self.keyboardView?.frame ?? CGRect.zero
-//        keyboardFrame.origin.y = kScreenHeight - keyboardFrame.height - kBottomSafeAreaHeight
-//        self.keyboardView?.frame = keyboardFrame
-        
-        let  hostView: UIView = getHostView()
+        let  hostView: UIView = movementBottomView()
         var keyboardFrame: CGRect = hostView.frame
-        keyboardFrame.origin.y = kScreenHeight - keyboardFrame.height - kBottomSafeAreaHeight
+        keyboardFrame.origin.y = kScreenHeight - keyboardFrame.height
         hostView.frame  = keyboardFrame
         
     }
@@ -234,7 +313,6 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
                     containerView = view
                     break
                 }
-
             }
 
         }
@@ -246,20 +324,102 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
         
     }
     
+    func getAmount() -> String {
+        return self.inputAmountView?.inputTFEditingResult() ?? "0.00"
+    }
+    
+    func tallyComplete() -> Void {
+        
+        self.tallyModel?.amount = self.getAmount()
+        
+        self.dismiss(animated: true) {
+            
+        }
+        
+    }
+    
+    func showDatePicker() -> Void {
+        
+        var frame: CGRect = self.datePicker.frame
+        frame.origin.y = self.navigationController?.view.frame.height ?? kScreenHeight
+        self.datePicker.frame = frame
+        
+        if !(self.navigationController?.view.subviews.contains(self.datePicker))! {
+            self.navigationController?.view.addSubview(self.datePicker)
+        }
+        
+        UIView.animate(withDuration: 0.2) {
+            var frame: CGRect = self.datePicker.frame
+            frame.origin.y = (self.navigationController?.view.frame.height ?? kScreenHeight) - frame.height
+            self.datePicker.frame = frame
+        }
+        
+    }
+    
+    func hiddenDatePicker() -> Void {
+        
+        if  (self.navigationController?.view.subviews.contains(self.datePicker))! {
+            
+            var frame: CGRect = self.datePicker.frame
+            if frame.origin.y < (self.navigationController?.view.frame.height ?? kScreenHeight){
+
+                UIView.animate(withDuration: 0.2) {
+
+                }
+                
+                UIView.animate(withDuration: 0.2, animations: {
+                    frame.origin.y = self.navigationController?.view.frame.height ?? kScreenHeight
+                    self.datePicker.frame = frame
+                }) { (flag) in
+                    if flag {
+                        self.datePicker.removeFromSuperview()
+                    }
+                }
+                
+            }
+            
+            
+        }
+        
+    }
+    
+    func datePickerIsShown() -> Bool {
+        
+        if !(self.remarkView?.tvIsFirstResponder() ?? true) && !(self.inputAmountView?.tfIsFirstResponder())! && self.datePicker.superview != nil {
+            return true
+        }
+        
+        return false
+    }
+    
+    func movementBottomView() -> UIView {
+        
+        if datePickerIsShown() {
+            return self.datePicker
+        }
+        return getHostView()
+        
+    }
+    
+    
      // MARK: - KeyboardViewDelegate
     
     func keyboardHandler(title: String, key: Key.KeyNumber) {
-        
-        var amount: String?
         
         switch key {
         case .delete:
             self.inputAmountView?.deleteInputTF()
            break
         case .done:
+            if (self.getAmount() as NSString).floatValue > 0.00 {
+                tallyComplete()
+                return
+            }else{
+                self.remarkView?.tvBecomeFirstResponder()
+            }
             break
         case .equal:
-            amount = self.inputAmountView?.inputTFEditingResult() ?? ""
+            self.inputAmountView?.inputTFEditingResult()
             break
         default:
             self.inputAmountView?.inputTF(append: title)
@@ -271,13 +431,74 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
      // MARK: - RemarkViewDelegate
     
     func remarkTV(beginEditing textView: UITextView) {
-        
+        self.isSwitchFirstResponder = true
+        hiddenDatePicker()
     }
     
     func remarkTV(endEditing textView: UITextView) {
+    
         if self.isSwitchFirstResponder{
-            self.inputAmountView?.inputTF?.becomeFirstResponder()
+            self.inputAmountView?.tfBecomeFirstReponder()
         }
+        
     }
     
+    func remarkTV(editingComplete: UITextView) {
+        
+        if (self.getAmount() as NSString).floatValue > 0 {
+            self.isSwitchFirstResponder = false
+            tallyComplete()
+        }else{
+            self.isSwitchFirstResponder = true
+        }
+        
+    }
+    
+     // MARK: - DateShownViewDelegate
+    
+    func cancel(_ dateShown: DateShownView) {
+        
+        self.isSwitchFirstResponder = true
+        hiddenDatePicker()
+        self.remarkView?.tvBecomeFirstResponder()
+        
+    }
+    
+    func ok(_ dateShown: DateShownView, date: Date) {
+        
+        self.isSwitchFirstResponder = true
+        hiddenDatePicker()
+        self.remarkView?.tvBecomeFirstResponder()
+        
+        let format: DateFormatter = DateFormatter.init()
+        format.dateFormat = "yyyy/MM/dd"
+        let dateString: String = format.string(from: date)
+        let nowDate: Date = Date.init()
+        let nowDateString = format.string(from: nowDate)
+        
+        if dateString == nowDateString {
+            self.selectDateView?.setTitle(title: "今天")
+        }else{
+            self.selectDateView?.setTitle(title: dateString)
+        }
+
+        
+    }
+    
+     // MARK: - SelectDateViewDelegate
+    
+    func clicked(_ selectDateView: SelectDateView) {
+        
+        self.isSwitchFirstResponder = false
+        self.view.endEditing(true)
+        showDatePicker()
+        
+    }
+    
+     // MARK: - Add_InputAmountViewDelegate
+    
+    func inputAmountView(beginEditing textField: UITextField) {
+        self.isSwitchFirstResponder = true
+        hiddenDatePicker()
+    }
 }

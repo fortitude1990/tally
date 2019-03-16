@@ -11,6 +11,7 @@ import UIKit
 @objc protocol RemarkViewDelegate: NSObjectProtocol{
     @objc optional func remarkTV(beginEditing textView: UITextView)
     @objc optional func remarkTV(endEditing textView: UITextView)
+    @objc optional func remarkTV(editingComplete: UITextView)
 }
 
 
@@ -75,6 +76,9 @@ class RemarkView: UIView, UITextViewDelegate {
         return self.remarkTV.isFirstResponder
     }
     
+    func tvBecomeFirstResponder() -> Void {
+        self.remarkTV.becomeFirstResponder()
+    }
     
      // MARK: - UITextViewDelegate
     
@@ -117,18 +121,16 @@ class RemarkView: UIView, UITextViewDelegate {
         superViewFrame.size.height = frame.height + lineFrame.height
         textView.superview?.frame = superViewFrame
         
-        
-        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
+            self.delegate?.remarkTV!(editingComplete: textView)
             textView.resignFirstResponder()
             return false
         }
         return true
     }
-    
-    
+
     
 }

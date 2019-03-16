@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol SelectDateViewDelegate: NSObjectProtocol{
+    @objc optional func clicked(_ selectDateView: SelectDateView)
+}
+
 class SelectDateView: UIView {
 
     /*
@@ -23,6 +27,7 @@ class SelectDateView: UIView {
      // MARK: - Property
   
     var todayView: TodayView?
+    weak var delegate: SelectDateViewDelegate?
 
      // MARK: - Init
     
@@ -48,7 +53,16 @@ class SelectDateView: UIView {
         line.backgroundColor = UIColor.init(red: 235/255.0, green: 235/255.0, blue: 235/255.0, alpha: 1.0)
         self.addSubview(line)
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGesAction(tap:)))
+        self.addGestureRecognizer(tap)
         
     }
     
+    @objc func tapGesAction(tap: UITapGestureRecognizer) -> Void {
+        self.delegate?.clicked!(self)
+    }
+    
+    func setTitle(title: String) -> Void {
+        self.todayView?.setTitleLabelText(title)
+    }
 }

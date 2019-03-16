@@ -10,12 +10,48 @@ import UIKit
 
 class ConsumeTypeCollectionViewCell: UICollectionViewCell {
     
+    
+     // MARK: - Property
+    
+    private var _data: ConsumeTypeModel?
+    private var imageViewSuperView: UIView?
+    
+    private let nomarlColor: UIColor = UIColor.init(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1.0)
+    private let highColor1: UIColor = themeColor
+    private let highColor2: UIColor = UIColor.cyan
+    
+    var data: ConsumeTypeModel{
+        set{
+            _data = newValue
+            self.titleLabel.text = _data?.name
+            
+            if _data?.isSelected ?? false {
+                
+                self.imageView.image = UIImage.init(named: _data?.highImageName ?? "")
+                if _data?.tallyType == TallyModel.TalleyType.spending{
+                    self.imageViewSuperView?.backgroundColor = highColor1
+                }else{
+                    self.imageViewSuperView?.backgroundColor = highColor2
+                }
+                
+            }else{
+                self.imageView.image = UIImage.init(named: _data?.imageName ?? "")
+                self.imageViewSuperView?.backgroundColor = nomarlColor
+            }
+            
+        }
+        
+        get{
+            return _data ?? ConsumeTypeModel.init()
+        }
+    }
+    
      // MARK: - Lazy
     
     lazy var imageView: UIImageView = {
         let aImageView: UIImageView = UIImageView.init()
-        aImageView.backgroundColor = UIColor.lightGray
-        aImageView.image = UIImage.init(named: "category_e_beauty_normal")
+//        aImageView.contentMode = UIView.ContentMode.scaleAspectFit
+        aImageView.image = UIImage.init(named: "做明细")
         return aImageView
     }()
     
@@ -44,19 +80,26 @@ class ConsumeTypeCollectionViewCell: UICollectionViewCell {
     
     func setupUI(frame: CGRect) -> Void {
         
-//        self.backgroundColor = UIColor.cyan
         
         
         let titleLabelHeight: CGFloat = 15
         self.addSubview(self.titleLabel)
         self.titleLabel.frame = CGRect.init(x: 0, y: frame.height - titleLabelHeight, width: frame.width, height: titleLabelHeight)
         
-        let imageViewWidth: CGFloat = frame.height - titleLabelHeight - 10
-        let originX: CGFloat = (frame.width - imageViewWidth) / 2.0
-        self.addSubview(self.imageView)
-        self.imageView.frame = CGRect.init(x: originX, y: 5, width: imageViewWidth, height: imageViewWidth)
+        let imageViewSuperViewWidth: CGFloat = frame.height - titleLabelHeight - 10
+        let originX: CGFloat = (frame.width - imageViewSuperViewWidth) / 2.0
+        let imageViewSuperView: UIView = UIView.init(frame: CGRect.init(x: originX, y: 5, width: imageViewSuperViewWidth, height: imageViewSuperViewWidth))
+        imageViewSuperView.backgroundColor = UIColor.init(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1.0)
+        imageViewSuperView.layer.cornerRadius = imageViewSuperViewWidth / 2.0
+        imageViewSuperView.clipsToBounds = true
+        self.addSubview(imageViewSuperView)
+        self.imageViewSuperView = imageViewSuperView
+
+        
+        let imageViewWidth: CGFloat = imageViewSuperViewWidth - 10
+        self.imageView.frame = CGRect.init(x: 5, y: 5, width: imageViewWidth, height: imageViewWidth)
         self.imageView.layer.cornerRadius = imageViewWidth / 2.0
-        self.imageView.clipsToBounds = true
+        imageViewSuperView.addSubview(self.imageView)
         
 
         

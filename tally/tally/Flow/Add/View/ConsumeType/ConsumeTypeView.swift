@@ -8,8 +8,9 @@
 
 import UIKit
 
-@objc public protocol ConsumeTypeViewDelegate: NSObjectProtocol {
+@objc protocol ConsumeTypeViewDelegate: NSObjectProtocol {
     func consumeTypeViewPanGesture(ges: UIPanGestureRecognizer)
+    @objc optional func consumeTypeView(didSelected consumeType: ConsumeTypeModel)
 }
 
 
@@ -27,6 +28,8 @@ class ConsumeTypeView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     let identifier: String = "identifier"
     weak var delegate: ConsumeTypeViewDelegate?
+    var dataArray: NSMutableArray = NSMutableArray.init()
+    var selectedConsumeTypeIndexPath: IndexPath?
     
      // MARK: - HitTest
     
@@ -105,6 +108,49 @@ class ConsumeTypeView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
                 
     }
     
+     // MARK: - LoadData
+    
+    func loadData(aConsumeType: ConsumeTypeModel?,talleyType: TallyModel.TalleyType) -> Void {
+        
+        var plistName: String = "ConsumeType"
+        
+        if talleyType == TallyModel.TalleyType.income {
+            plistName = "IncomeType"
+        }
+        
+        let path: String = Bundle.main.path(forResource: plistName, ofType: "plist") ?? ""
+        let plist: NSArray = NSArray(contentsOfFile: path) ?? NSArray.init()
+        
+        self.dataArray.removeAllObjects()
+        
+        var flag: Bool = true
+        
+        for dic in plist as! [Dictionary<String, String>]  {
+            
+            let consumeTypeModel: ConsumeTypeModel = ConsumeTypeModel.init()
+            consumeTypeModel.name = dic["name"]
+            consumeTypeModel.imageName = dic["imageName"]
+            consumeTypeModel.highImageName = dic["highImageName"]
+            consumeTypeModel.tallyType = talleyType
+            
+            if aConsumeType == nil && flag{
+                flag = false
+                consumeTypeModel.isSelected = true
+                self.delegate?.consumeTypeView!(didSelected: consumeTypeModel)
+            }else{
+                if aConsumeType?.name == consumeTypeModel.name{
+                    consumeTypeModel.isSelected = true
+                }
+            }
+            
+            self.dataArray.add(consumeTypeModel)
+            
+        }
+        
+        self.collectionView.reloadData()
+
+    }
+    
      // MARK: - UIGestureRecognizerDelegate
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool{
@@ -130,13 +176,43 @@ class ConsumeTypeView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     }
     
+    
      // MARK: - UICollectionViewDelegate
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let consumeType: ConsumeTypeModel = self.dataArray.object(at: indexPath.row) as! ConsumeTypeModel
+        consumeType.isSelected = true
+        self.dataArray.replaceObject(at: indexPath.row, with: consumeType)
+
+        if self.selectedConsumeTypeIndexPath == nil{
+            UIView.performWithoutAnimation {
+                collectionView.reloadItems(at: [indexPath])
+            }
+            
+        }else{
+            
+            let beforeConsumeType: ConsumeTypeModel = self.dataArray.object(at: self.selectedConsumeTypeIndexPath?.row ?? 0) as! ConsumeTypeModel
+            beforeConsumeType.isSelected = false
+            self.dataArray.replaceObject(at: self.selectedConsumeTypeIndexPath?.row ?? 0, with: beforeConsumeType)
+            UIView.performWithoutAnimation {
+                collectionView.reloadItems(at: [indexPath, self.selectedConsumeTypeIndexPath ?? IndexPath.init()])
+            }
+            
+        }
+        
+
+
+        
+        self.delegate?.consumeTypeView!(didSelected: consumeType)
+
+    }
     
      // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        let items: Int = 16
+        let items: Int = self.dataArray.count
         
         var pages: NSInteger?
         if items % 10 == 0 {
@@ -151,7 +227,11 @@ class ConsumeTypeView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identifier, for: indexPath)
+        let cell: ConsumeTypeCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identifier, for: indexPath) as! ConsumeTypeCollectionViewCell
+        cell.data = self.dataArray.object(at: indexPath.row) as! ConsumeTypeModel
+        if cell.data.isSelected{
+            self.selectedConsumeTypeIndexPath = indexPath
+        }
         return cell
         
     }

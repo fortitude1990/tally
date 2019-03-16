@@ -8,12 +8,16 @@
 
 import UIKit
 
+@objc protocol Add_InputAmountViewDelegate: NSObjectProtocol{
+    @objc optional func inputAmountView(beginEditing textField: UITextField)
+}
+
 class Add_InputAmountView: UIView, UITextFieldDelegate {
 
      // MARK: - Property
     
     var inputTF: UITextField?
-    
+    weak var delegate: Add_InputAmountViewDelegate?
     
      // MARK: - Init
     
@@ -177,9 +181,19 @@ class Add_InputAmountView: UIView, UITextFieldDelegate {
         return self.inputTF?.isFirstResponder ?? false
     }
     
+    func tfBecomeFirstReponder() -> Void {
+        self.inputTF?.becomeFirstResponder()
+    }
+    
+    func setAmount(amount: String) -> Void {
+        self.inputTF?.text = String("￥\(amount)")
+    }
+    
      // MARK: - UITextFiledDelegate
     
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.delegate?.inputAmountView!(beginEditing: textField)
+    }
     
 
 }
