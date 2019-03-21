@@ -5,9 +5,9 @@
 
 ## 语言
 [Swift](http://www.swift51.com/swift4.0/)
-
 ## 第三方框架
-[SnapKit](https://github.com/SnapKit/SnapKit)
+* [SnapKit](https://github.com/SnapKit/SnapKit)
+* [SQLite.swift](https://github.com/stephencelis/SQLite.swift)
 
 ## 开发中遇到的问题
 * 输入框处于FirstResponder下，如何不弹出键盘
@@ -23,10 +23,14 @@
 ## 图样
 
 <div>
-  <img style="float:left margin:20" src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG6.jpeg" 
-width = "25%" alt = "账单列表"/>
-<img style="float:left margin:20" src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG7.jpeg" 
-width = "25%" alt = "添加"/>
+  <img style="float:left margin:20" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG6.jpeg" 
+       width = "25%" 
+       alt = "账单列表"/>
+ <img style="float:left margin:20" 
+      src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG7.jpeg" 
+      width = "25%" 
+      alt = "添加"/>
 </div>
 
 ## 关于作者
