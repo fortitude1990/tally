@@ -22,13 +22,7 @@
 
 ## 图样
 
-![动画](https://github.com/fortitude1990/tally/blob/master/images/动画效果.gif)
-
 <div>
-   <img style="float:left margin:20" 
-      src = "https://github.com/fortitude1990/tally/blob/master/images/动画效果.gif" 
-      width = "25%" 
-      alt = "动画效果"/>
   <img style="float:left margin:20" 
        src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG6.jpeg" 
        width = "25%" 
