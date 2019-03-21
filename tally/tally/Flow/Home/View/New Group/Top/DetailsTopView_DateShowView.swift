@@ -1,0 +1,70 @@
+//
+//  DetailsTopView_DateShowView.swift
+//  tally
+//
+//  Created by 李志敬 on 2019/3/20.
+//  Copyright © 2019 李志敬. All rights reserved.
+//
+
+import UIKit
+
+class DetailsTopView_DateShowView: UIView {
+
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+    }
+    */
+
+    var titleLabel: UILabel?
+    private var _title: String = ""
+    var title: String{
+        set{
+            _title = newValue
+            self.titleLabel?.text = _title.appending("月")
+        }
+        get{
+            return _title
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+  
+     // MARK: - SetupUI
+    
+    func setupUI() -> Void {
+        
+        self.titleLabel = UILabel.init()
+        self.titleLabel?.text = "03月"
+        self.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 21)
+        self.titleLabel?.textColor = UIColor.init(red: 31 / 255.0, green: 31 / 255.0, blue: 31 / 255.0, alpha: 1.0)
+        self.titleLabel?.isUserInteractionEnabled = true
+        self.addSubview(self.titleLabel ?? UIView.init())
+        self.titleLabel?.snp.makeConstraints({ (make) in
+            make.height.equalTo(30)
+            make.centerY.equalTo(self)
+            make.left.equalTo(0)
+        })
+        
+        let imageView: UIImageView = UIImageView.init()
+        imageView.image = UIImage.init(named: "下箭头-1")
+        imageView.isUserInteractionEnabled = true
+        self.addSubview(imageView)
+        imageView.snp.makeConstraints { (make) in
+            make.left.equalTo(self.titleLabel?.snp.right ?? 0)
+            make.width.height.equalTo(10)
+            make.centerY.equalTo(self)
+        }
+        
+    }
+    
+}

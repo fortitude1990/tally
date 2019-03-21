@@ -8,8 +8,10 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+class TabBarViewController: UITabBarController, AddViewControllerDelegate {
 
+    var homeViewController: HomeViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,6 +41,8 @@ class TabBarViewController: UITabBarController {
         let homeNavC1: UINavigationController = UINavigationController.init(rootViewController: homeVC1)
         self.viewControllers = [homeNavC, homeNavC1]
 
+        self.homeViewController = homeVC
+        
         //自定义tabBar添加之前必须先添加viewControllers，否则自定义tabBar无效
         let customTabBar:CustomTabBar = CustomTabBar.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: kTabBarHeight))
         customTabBar.delegate = self;
@@ -46,6 +50,7 @@ class TabBarViewController: UITabBarController {
             print("addbtnHandler响应了")
             
             let addVC: AddViewController = AddViewController.init()
+            addVC.delegate = self
             let addNavC: UINavigationController = UINavigationController.init(rootViewController: addVC)
             addNavC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             self.present(addNavC, animated: true, completion: {
@@ -71,6 +76,40 @@ class TabBarViewController: UITabBarController {
         print("\(item.tag)")
         
     }
+    
+    
+     // MARK: - AddViewControllerDelegate
+    
+    func addComplete(tally: TallyModel) {
+        
+        DispatchQueue.main.async {
+            
+            let aTally: TallyList = TallyList.init(tally: tally)
+            
+            let sql: SqlManager = SqlManager.shareInstance
+            let result = sql.tallylist_insert(tally: aTally)
+            
+            if result{
+                let result1 = sql.summary_update(tally: aTally, type: SqlManager.SummaryType.add)
+                if result1{
+                    let date: String = CalendarHelper.dateString(date: tally.date ?? "", originFromat: "yyyyMMdd", resultFromat: "yyyyMM")
+                    self.homeViewController?.loadData(loadDate: date)
+                }
+            }else{
+                print("list数据插入失败")
+            }
+            
+            
+            
+            
+
+            
+        }
+        
+    }
+    
+    
+
     
    
 }

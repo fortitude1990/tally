@@ -181,6 +181,10 @@ class ConsumeTypeView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if self.selectedConsumeTypeIndexPath == indexPath{
+            return
+        }
+        
         let consumeType: ConsumeTypeModel = self.dataArray.object(at: indexPath.row) as! ConsumeTypeModel
         consumeType.isSelected = true
         self.dataArray.replaceObject(at: indexPath.row, with: consumeType)

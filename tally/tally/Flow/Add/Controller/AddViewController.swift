@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol AddViewControllerDelegate: NSObjectProtocol{
+    @objc optional func addComplete(tally: TallyModel)
+}
+
 class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardViewDelegate, RemarkViewDelegate, DateShownViewDelegate, SelectDateViewDelegate, Add_InputAmountViewDelegate {
 
     enum MovementSpaceType {
@@ -28,6 +32,7 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
     var remarkView: RemarkView?
     var isSwitchFirstResponder: Bool = true
     var selectDateView: SelectDateView?
+    weak var delegate: AddViewControllerDelegate?
     
     
     lazy var datePicker: DateShownView = {
@@ -145,7 +150,7 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
             self.tallyModel?.amount = "0.00"
             
             let format: DateFormatter = DateFormatter.init()
-            format.dateFormat = "yyyy/MM/dd"
+            format.dateFormat = "yyyyMMdd"
             let nowDate: Date = Date.init()
             let nowDateString = format.string(from: nowDate)
             
@@ -325,7 +330,12 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
     }
     
     func getAmount() -> String {
-        return self.inputAmountView?.inputTFEditingResult() ?? "0.00"
+        
+        var amount: String = self.inputAmountView?.inputTFEditingResult() ?? "0.00"
+        if amount.first == "-" {
+            amount.removeFirst()
+        }
+        return amount
     }
     
     func tallyComplete() -> Void {
@@ -333,7 +343,7 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
         self.tallyModel?.amount = self.getAmount()
         
         self.dismiss(animated: true) {
-            
+            self.delegate?.addComplete!(tally: self.tallyModel ?? TallyModel.init())
         }
         
     }
@@ -482,6 +492,10 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
             self.selectDateView?.setTitle(title: dateString)
         }
 
+        format.dateFormat = "yyyyMMdd"
+        let string = format.string(from: date)
+        self.tallyModel?.date = string
+        
         
     }
     

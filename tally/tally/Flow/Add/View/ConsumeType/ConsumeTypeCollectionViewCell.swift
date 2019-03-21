@@ -18,7 +18,7 @@ class ConsumeTypeCollectionViewCell: UICollectionViewCell {
     
     private let nomarlColor: UIColor = UIColor.init(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1.0)
     private let highColor1: UIColor = themeColor
-    private let highColor2: UIColor = UIColor.cyan
+    private let highColor2: UIColor = UIColor.init(red: 0, green: 179 / 255.0, blue: 125 / 255.0, alpha: 1.0)
     
     var data: ConsumeTypeModel{
         set{

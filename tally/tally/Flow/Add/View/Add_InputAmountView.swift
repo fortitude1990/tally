@@ -142,6 +142,10 @@ class Add_InputAmountView: UIView, UITextFieldDelegate {
             finalAmount?.removeLast()
         }
         
+        if finalAmount?.first == "-"{
+            finalAmount = "0".appending(finalAmount ?? "0.00")
+        }
+        
         let addArray:Array<String> = finalAmount?.components(separatedBy: "+") ?? []
         var sum: Float = 0
         for add:String in addArray {
@@ -149,13 +153,16 @@ class Add_InputAmountView: UIView, UITextFieldDelegate {
             let reduceArray: Array<String> = add.components(separatedBy: "-")
             
             var sub: Float = 0
-            for reduce:String in reduceArray{
+            for i in 0...(reduceArray.count - 1){
+                
+                let reduce = reduceArray[i]
                 let reduceValue: Float = Float.init(reduce) ?? 0.00
-                if sub == 0 {
+                if i == 0 {
                     sub = reduceValue
                 }else{
                     sub -= reduceValue
                 }
+                
             }
             
             sum += sub

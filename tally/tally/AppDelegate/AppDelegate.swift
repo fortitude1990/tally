@@ -19,6 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         
+        DispatchQueue.main.async {
+            let sqlManager: SqlManager = SqlManager.shareInstance
+            let result1: Bool = sqlManager.tallylist_create()
+            let result2: Bool = sqlManager.summary_create()
+            let result3: Bool = sqlManager.consumetype_create()
+            if result1 && result2 && result3{
+                print("TallyListTB数据库创建成功")
+            }else{
+                print("TallyListTB数据库异常")
+
+            }
+        }
+        
+        
                 
         return true
     }
