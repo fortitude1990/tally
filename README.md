@@ -23,8 +23,10 @@
 ## 图样
 
 <div>
-<img style="float:left margin:5" src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG2.jpeg" 
-width = "25%" alt = "记录一笔"/>
+  <img style="float:left margin:5" src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG6.jpeg" 
+width = "25%" alt = "账单列表"/>
+<img style="float:left margin:5" src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG7.jpeg" 
+width = "25%" alt = "添加"/>
 </div>
 
 ## 关于作者
