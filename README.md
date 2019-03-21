@@ -5,9 +5,9 @@
 
 ## 语言
 [Swift](http://www.swift51.com/swift4.0/)
-[SQLite.swift](https://github.com/stephencelis/SQLite.swift)
 ## 第三方框架
-[SnapKit](https://github.com/SnapKit/SnapKit)
+* [SnapKit](https://github.com/SnapKit/SnapKit)
+* [SQLite.swift](https://github.com/stephencelis/SQLite.swift)
 
 ## 开发中遇到的问题
 * 输入框处于FirstResponder下，如何不弹出键盘
