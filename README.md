@@ -23,10 +23,20 @@
 ## 图样
 
 <div>
-  <img style="float:left margin:20" src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG6.jpeg" 
-width = "25%" alt = "账单列表"/>
-<img style="float:left margin:20" src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG7.jpeg" 
-width = "25%" alt = "添加"/>
+  <img style="float:left margin:20" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG6.jpeg" 
+       width = "25%" 
+       alt = "账单列表"/>
+ <img style="float:left margin:20" 
+      src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG7.jpeg" 
+      width = "25%" 
+      alt = "添加"/>
+ <iframe 
+    style="float:left margin:20"
+    width=25% 
+    src="http://player.youku.com/embed/XMzMxMjE0MjY4NA==" 
+    frameborder=0 
+    allowfullscreen/> 
 </div>
 
 ## 关于作者
