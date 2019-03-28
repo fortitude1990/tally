@@ -100,4 +100,111 @@ class CalendarHelper: NSObject {
         return format.date(from: dateString) ?? Date.init()
     }
     
+    
+    static func last(dateString: String) -> String{
+        
+        var date: String = ""
+        
+        if dateString.count == 4{
+            var year = (dateString as NSString).integerValue
+            year -= 1
+            date = String(format: "%ld", year)
+        }
+        
+        if dateString.count == 6{
+            
+            var year = (CalendarHelper.dateString(date: dateString, originFromat: "yyyyMM", resultFromat: "yyyy") as NSString).integerValue
+            var month = (CalendarHelper.month(date: dateString, dateFormat: "yyyyMM") as NSString).integerValue
+            if month == 1{
+                month = 12
+                year -= 1
+            }else{
+                month -= 1
+            }
+            
+            date = String(format: "%d%02d", year, month)
+        }
+        
+        if dateString.count == 8{
+            
+            var year = (CalendarHelper.dateString(date: dateString, originFromat: "yyyyMMdd", resultFromat: "yyyy") as NSString).integerValue
+            var month = (CalendarHelper.month(date: dateString, dateFormat: "yyyyMMdd") as NSString).integerValue
+            var day = (CalendarHelper.dateString(date: dateString, originFromat: "yyyyMMdd", resultFromat: "dd") as NSString).integerValue
+            
+            if day == 1{
+                
+                if month == 1{
+                    month = 12
+                    year -= 1
+                }else{
+                    month -= 1
+                }
+                
+                day = CalendarHelper.days(month: String(format:"%d", month))
+                
+            }else{
+                day -= 1
+            }
+            
+            date = String(format: "%d%02d%02d",year, month, day)
+
+        }
+        
+        return date
+    }
+    
+    static func next(dateString: String) -> String{
+        
+        var date: String = ""
+        
+        if dateString.count == 4{
+            var year = (dateString as NSString).integerValue
+            year += 1
+            date = String(format: "%ld", year)
+        }
+        
+        if dateString.count == 6{
+            
+            var year = (CalendarHelper.dateString(date: dateString, originFromat: "yyyyMM", resultFromat: "yyyy") as NSString).integerValue
+            var month = (CalendarHelper.month(date: dateString, dateFormat: "yyyyMM") as NSString).integerValue
+            if month == 12{
+                month = 1
+                year += 1
+            }else{
+                month += 1
+            }
+            
+            date = String(format: "%d%02d", year, month)
+        }
+        
+        if dateString.count == 8{
+            
+            var year = (CalendarHelper.dateString(date: dateString, originFromat: "yyyyMMdd", resultFromat: "yyyy") as NSString).integerValue
+            var month = (CalendarHelper.month(date: dateString, dateFormat: "yyyyMMdd") as NSString).integerValue
+            var day = (CalendarHelper.dateString(date: dateString, originFromat: "yyyyMMdd", resultFromat: "dd") as NSString).integerValue
+            
+            let currentDays = CalendarHelper.days(month: String(format:"%d", month))
+
+            
+            if day == currentDays{
+                
+                if month == 12{
+                    month = 1
+                    year += 1
+                }else{
+                    month += 1
+                }
+                
+                day = 1
+                
+            }else{
+                day += 1
+            }
+            
+            date = String(format: "%d%02d%02d",year, month, day)
+            
+        }
+        
+        return date
+    }
 }

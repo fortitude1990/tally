@@ -8,13 +8,16 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Details_TopViewDelegate, Details_DateSelectViewDelegate {
+class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Details_TopViewDelegate, Details_DateSelectViewDelegate, UIScrollViewDelegate {
 
     
     var scrollView_oneItem: Details_scrollViewItem?
+    var scrollView_twoItem: Details_scrollViewItem?
+    var scrollView_threeItem: Details_scrollViewItem?
     var topView: Details_TopView?
     var scrollView: UIScrollView?
     var datePickerBackView: Details_DateSelectView?
+    var currentDate: String = "000000"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +46,7 @@ class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Deta
         self.topView = topView
         
         let aScrollView: UIScrollView = UIScrollView.init(frame: CGRect.init(x: 0, y: topView.frame.maxY, width: kScreenWidth, height: kScreenHeight - topView.frame.height - kTabBarHeight))
+        aScrollView.delegate = self
         self.view.addSubview(aScrollView)
         self.scrollView = aScrollView
         
@@ -51,6 +55,20 @@ class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Deta
         aScrollView.addSubview(oneItem)
         self.scrollView_oneItem = oneItem
         
+        let twoItem: Details_scrollViewItem = Details_scrollViewItem.init(frame: CGRect.init(x: 0, y: aScrollView.frame.height, width: aScrollView.frame.width, height: aScrollView.frame.height))
+        twoItem.delegate = self
+        aScrollView.addSubview(twoItem)
+        self.scrollView_twoItem = twoItem
+        
+        let threeItem: Details_scrollViewItem = Details_scrollViewItem.init(frame: CGRect.init(x: 0, y: aScrollView.frame.height * 2, width: aScrollView.frame.width, height: aScrollView.frame.height))
+        threeItem.delegate = self
+        aScrollView.addSubview(threeItem)
+        self.scrollView_threeItem = threeItem
+        
+        aScrollView.contentSize = CGSize.init(width: aScrollView.frame.width, height: aScrollView.frame.height * 3)
+        aScrollView.isScrollEnabled = false
+        aScrollView.setContentOffset(CGPoint.init(x: 0, y: aScrollView.frame.height), animated: false)
+
         
     }
 
@@ -58,11 +76,23 @@ class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Deta
     
     func loadData(loadDate: String) -> Void {
         
-        if loadDate.count != 6{
+        self.currentDate = loadDate
+        let last = CalendarHelper.last(dateString: self.currentDate)
+        let next = CalendarHelper.next(dateString: self.currentDate)
+        
+        loadItemDate(date: next, item: self.scrollView_oneItem)
+        loadItemDate(date: self.currentDate, item: self.scrollView_twoItem)
+        loadItemDate(date: last, item: self.scrollView_threeItem)
+
+    }
+    
+    func loadItemDate(date: String, item: Details_scrollViewItem?) -> Void {
+        
+        if date.count != 6{
             return
         }
         
-        let nowDate = loadDate
+        let nowDate = date
         let month = CalendarHelper.month(date: nowDate, dateFormat: "yyyyMM")
         let days = CalendarHelper.days(month: month)
         let startDate = nowDate.appending("01")
@@ -71,11 +101,15 @@ class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Deta
         let sqlManager: SqlManager = SqlManager.shareInstance
         
         let array: [TallyList] = sqlManager.tallylist_query(startDate: startDate, endDate: endDate, userid: "00000000")
-        self.scrollView_oneItem?.loadData(array: array)
+        item?.loadData(array: array)
         
-        updateSummary(userid: "00000000", date: nowDate)
-
+        if item == self.scrollView_twoItem{
+            updateSummary(userid: "00000000", date: nowDate)
+        }
+        
+        
     }
+    
     
     func updateSummary(userid: String, date: String) -> Void {
         
@@ -84,11 +118,11 @@ class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Deta
         let summary_income = sqlManager.query(userid: userid, tallyType: 2, summaryType: 1, date: date)
         
         if summary_spending != nil{
-            self.topView?.loadData(date: date, spending: (summary_spending as! Summary).totalamount ?? "0.00", income: nil)
+            self.topView?.loadData(date: date, spending: summary_spending?.totalamount ?? "0.00", income: nil)
         }
         
         if summary_income != nil{
-            self.topView?.loadData(date: date, spending: nil, income: (summary_income as! Summary).totalamount ?? "0.00")
+            self.topView?.loadData(date: date, spending: nil, income: summary_income? .totalamount ?? "0.00")
         }
         
     }
@@ -119,12 +153,40 @@ class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Deta
         
     }
     
+    func tableView(didSelect tally: TallyList) {
+        let billingDetailsVC = BillingDetailsViewController.init()
+        billingDetailsVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(billingDetailsVC, animated: true)
+    }
+    
+    func loadMore() {
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            self.scrollView?.setContentOffset(CGPoint.init(x: 0, y: (self.scrollView?.frame.height ?? 0.00) * 2), animated: false)
+        })
+       self.loadData(loadDate:CalendarHelper.last(dateString: self.currentDate) )
+       self.scrollView?.setContentOffset(CGPoint.init(x: 0, y: self.scrollView?.frame.height ?? 0.00) , animated: false)
+        
+    }
+    
+    func pullRefresh(){
+    
+        if CalendarHelper.nowDateString(dateFormat: "yyyyMM") == self.currentDate{
+            return
+        }
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            self.scrollView?.setContentOffset(CGPoint.init(x: 0, y: (self.scrollView?.frame.height ?? 0.00) * 0), animated: false)
+        })
+        self.loadData(loadDate:CalendarHelper.next(dateString: self.currentDate) )
+        self.scrollView?.setContentOffset(CGPoint.init(x: 0, y: self.scrollView?.frame.height ?? 0.00) , animated: false)
+        
+    }
+    
      // MARK: - Details_TopViewDelegate
     
     func selectDateClicked() {
-        
         shownDatePicker()
-        
     }
     
      // MARK: - Details_DateSelectViewDelegate
@@ -134,9 +196,20 @@ class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Deta
     }
     
     func ok(_ datePicker: Details_DateSelectView, date: Date) {
-        
         loadData(loadDate: CalendarHelper.dateString(date: date, dateFormat: "yyyyMM"))
+    }
+    
+     // MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        
+
+
+
         
     }
+    
+    
+    
     
 }

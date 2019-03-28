@@ -455,6 +455,8 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
     
     func remarkTV(editingComplete: UITextView) {
         
+        self.tallyModel?.remark = editingComplete.text
+        
         if (self.getAmount() as NSString).floatValue > 0 {
             self.isSwitchFirstResponder = false
             tallyComplete()

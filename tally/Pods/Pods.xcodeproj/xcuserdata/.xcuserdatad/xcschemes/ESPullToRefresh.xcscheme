@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CF132BD09093B296443FE9AC2D62226F"
-               BlueprintName = "Pods-tally"
+               BlueprintIdentifier = "2AAC70897269009701EA2ADFE2CB50C2"
+               BlueprintName = "ESPullToRefresh"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pods-tally.framework">
+               BuildableName = "ESPullToRefresh.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

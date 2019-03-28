@@ -133,7 +133,7 @@ class Add_InputAmountView: UIView, UITextFieldDelegate {
         
     }
     
-    func inputTFEditingResult() -> String {
+    @discardableResult func inputTFEditingResult() -> String {
         
         var finalAmount: String?
         let inputTFText: String = self.inputTF?.text ?? ""

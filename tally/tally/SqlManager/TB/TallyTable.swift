@@ -66,7 +66,7 @@ class TallyTable: NSObject {
                 let tally: TallyList = TallyList.init()
                 tally.id = try row.get(ID)
                 tally.amount = try row.get(AMOUNT)
-                tally.date = try row.get(DATE)
+                tally.date = try String(format: "%@", row.get(DATE))
                 tally.consumeType = try row.get(CONSUMETYPE)
                 tally.tallyType = try row.get(TALLYTYPE)
                 tally.remark = try row.get(REMARK)
@@ -84,12 +84,70 @@ class TallyTable: NSObject {
     func query(startDate: String, endDate: String, userid: String) -> [TallyList] {
         
         let array: NSMutableArray = NSMutableArray.init()
+        
+        let select = "SELECT * FROM tallyList WHERE ((date >=  \"\(startDate)\") AND (date <= \"\(endDate)\") AND (userid = \"\(userid)\")) ORDER BY id DESC"
+        
+        var db: OpaquePointer!
+        let openDBResult = sqlite3_open(SqlManager.getPath(), &db)
+        if openDBResult != SQLITE_OK{
+            print("数据库打开失败")
+            return array as! [TallyList]
+        }
+        
+        var handler: OpaquePointer!
+       let queryResult = sqlite3_prepare_v2(db, select, -1, &handler, nil)
+        if queryResult == SQLITE_OK{
+            
+                while(sqlite3_step(handler) == SQLITE_ROW){
+                    
+                    let id = sqlite3_column_int(handler, 0)
+                    let aUserid = sqlite3_column_text(handler, 1)
+                    let amount = sqlite3_column_text(handler, 2)
+                    let date = sqlite3_column_text(handler, 3)
+                    let remark = sqlite3_column_text(handler, 4)
+                    let consumeType = sqlite3_column_text(handler, 5)
+                    let tallyType = sqlite3_column_int(handler, 6)
+                    
+                    
+                    let tally: TallyList = TallyList.init()
+                    tally.id = Int64(id)
+                    tally.amount = String(cString: UnsafePointer(amount!))
+                    tally.date = String(cString: UnsafePointer(date!))
+                    tally.consumeType = String(cString: UnsafePointer(consumeType!))
+                    if remark != nil{
+                        tally.remark = String(cString: UnsafePointer(remark!))
+                    }
+                    tally.userid = String(cString: UnsafePointer(aUserid!))
+                    tally.tallyType = Int(tallyType)
+
+                    
+                    array.add(tally)
+                    
+                }
+    
+        }
+        
+        sqlite3_finalize(handler)
+        let closeResult = sqlite3_close(db)
+        if closeResult == SQLITE_OK{
+            print("数据库关闭成功")
+        }
+        
+        
+        return array as! [TallyList]
+
+        
+        
+        /*
+        
         do {
-            
+         
             let db = try Connection(SqlManager.getPath())
-            let tallyListRows = try db.prepare(TALLY.select(*).filter(DATE >= startDate).filter(DATE <= endDate).filter(USERID == userid).order(ID.desc))
-            
-            for row:Row in tallyListRows {
+            let select = TALLY.select(*).filter(DATE >= startDate).filter(DATE <= endDate).filter(USERID == userid).order(ID.desc)
+
+            let tallyListRows = try db.prepare(select)
+
+            for row:Row in tallyListRows{
                 let tally: TallyList = TallyList.init()
                 tally.id = try row.get(ID)
                 tally.amount = try row.get(AMOUNT)
@@ -104,8 +162,9 @@ class TallyTable: NSObject {
         } catch  {
             print("读取失败")
         }
-        
-        return array as! [TallyList]
+ 
+        */
+ 
     }
     
     func delete(id: Int64) -> Bool {

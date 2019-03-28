@@ -62,7 +62,7 @@ class Details_TopView: UIView {
         let titleLabel: UILabel = UILabel.init()
         titleLabel.font = UIFont.init(name: "HYi2gj", size: 24)
         titleLabel.textAlignment = NSTextAlignment.center
-        titleLabel.text = "卡宝·记账"
+        titleLabel.text = "熊猫·记账"
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(kStatusBarHeight)
@@ -185,11 +185,15 @@ class Details_TopView: UIView {
         }
 
         if spending != nil{
-            self.spendingAmountLabel?.text = spending
+            let att: NSMutableAttributedString = NSMutableAttributedString.init(string: spending ?? "0.00")
+            att.addAttributes([NSAttributedString.Key.font : UIFont.init(name: "PingFangSC-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)], range: NSRange.init(location: (spending?.count ?? 2) - 2, length: 2))
+            self.spendingAmountLabel?.attributedText = att
         }
         
         if income != nil{
-            self.incomeAmountLabel?.text = income
+            let att: NSMutableAttributedString = NSMutableAttributedString.init(string: income ?? "0.00")
+            att.addAttributes([NSAttributedString.Key.font : UIFont.init(name: "PingFangSC-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)], range: NSRange.init(location: (income?.count ?? 2) - 2, length: 2))
+            self.incomeAmountLabel?.attributedText = att
         }
         
     }

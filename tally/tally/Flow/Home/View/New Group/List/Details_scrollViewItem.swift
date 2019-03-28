@@ -10,6 +10,10 @@ import UIKit
 
 @objc protocol Details_scrollViewItemDelegate: NSObjectProtocol{
     @objc optional func tableView(delete tally: TallyList)
+    @objc optional func tableView(didSelect tally: TallyList)
+    @objc optional func loadMore()
+    @objc optional func pullRefresh()
+
 }
 
 class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource {
@@ -28,6 +32,7 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
     weak var delegate: Details_scrollViewItemDelegate?
     
     lazy var tableView: UITableView = {
+        
         let aTableView: UITableView = UITableView.init(frame: CGRect.zero , style: UITableView.Style.plain)
         aTableView.tableFooterView = UIView.init()
         aTableView.tableHeaderView = UIView.init()
@@ -37,6 +42,21 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
         
         aTableView.register(Details_ListTableViewCell.classForCoder(), forCellReuseIdentifier: identifier)
         aTableView.register(Details_ListTableViewHeader.classForCoder(), forCellReuseIdentifier: headerIdentifier)
+        
+        aTableView.addLoadMore(handler: {
+            [unowned self] in
+            self.delegate?.loadMore?()
+        })
+
+        aTableView.addPullRefresh(handler: {
+            [unowned self] in
+            self.delegate?.pullRefresh?()
+        })
+        
+        
+
+        
+        
         return aTableView
     }()
     
@@ -120,7 +140,10 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
                 self.dataArray.add(flagArray)
              }
           }
+        
         self.tableView.reloadData()
+        
+        self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: UITableView.ScrollPosition.middle, animated: true)
         
     }
     
@@ -141,7 +164,13 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        let array: [TallyList] = self.dataArray.object(at: indexPath.section) as! Array
+        let tallyModel = array[indexPath.row]
+        self.delegate?.tableView!(didSelect: tallyModel)
+        
     }
     
      // MARK: - UITableViewDataSource
@@ -158,13 +187,21 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0{
+            
             let cell: Details_ListTableViewHeader = tableView.dequeueReusableCell(withIdentifier: headerIdentifier, for: indexPath) as! Details_ListTableViewHeader
             let array: NSArray = self.dataArray.object(at: indexPath.section) as! NSArray
             cell.headrModel = array.firstObject as! TallyListHeaderModel
+            cell.isUserInteractionEnabled = false
             return cell
             
         }else{
+            
             let cell: Details_ListTableViewCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Details_ListTableViewCell
+            
+            if self.dataArray.count == 0{
+                return cell
+            }
+            
             let array: [TallyList] = self.dataArray.object(at: indexPath.section) as! Array
             cell.tallyModel = array[indexPath.row]
             
@@ -176,9 +213,6 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
             
             return cell
         }
-        
-
-        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -197,10 +231,17 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
             let array: [TallyList] = self.dataArray.object(at: indexPath.section) as! Array
             let tallyModel: TallyList = array[indexPath.row]
 
-            let arr: NSMutableArray = NSMutableArray.init(array: array as NSArray)
-            arr.removeObject(at: indexPath.row)
-            self.dataArray.replaceObject(at: indexPath.section, with: arr)
-            self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            if array.count > 2{
+                let arr: NSMutableArray = NSMutableArray.init(array: array as NSArray)
+                arr.removeObject(at: indexPath.row)
+                self.dataArray.replaceObject(at: indexPath.section, with: arr)
+                self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            }else{
+                self.dataArray.removeObject(at: indexPath.section)
+                self.tableView.deleteSections(IndexSet.init(arrayLiteral: indexPath.section), with: UITableView.RowAnimation.fade)
+            }
+            
+
             
             DispatchQueue.global().async {
                 

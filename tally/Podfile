@@ -11,5 +11,6 @@ target 'tally' do
 
  pod 'SnapKit', '~> 4.0.0'
  pod 'SQLite.swift'
+ pod "ESPullToRefresh"
 
 end

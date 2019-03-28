@@ -23,7 +23,12 @@ class DetailsTopView_DateShowView: UIView {
     var title: String{
         set{
             _title = newValue
-            self.titleLabel?.text = _title.appending("月")
+            
+            _title = _title.appending("月")
+            let att: NSMutableAttributedString = NSMutableAttributedString.init(string: _title )
+            att.addAttributes([NSAttributedString.Key.font : UIFont.init(name: "PingFangSC-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)], range: NSRange.init(location: (_title.count) - 1, length: 1))
+            self.titleLabel?.attributedText = att
+            
         }
         get{
             return _title

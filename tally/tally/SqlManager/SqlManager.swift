@@ -59,7 +59,7 @@ class SqlManager: NSObject {
         return summary_tb.create()
     }
     
-    func summary_update(tally: TallyList, type: SummaryType) -> Bool {
+    @discardableResult func summary_update(tally: TallyList, type: SummaryType) -> Bool {
         
         let result1 = monthlyUpdate(tally: tally, type: type)
         let result2 = yearlyUpade(tally: tally, type: type)
