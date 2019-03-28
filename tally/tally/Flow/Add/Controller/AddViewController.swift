@@ -22,20 +22,19 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
      // MARK: - Property
     
     var tallyModel: TallyModel?
-    var spendingModel: ConsumeTypeModel?
-    var incomeModel: ConsumeTypeModel?
-    
-    var consumeTypeView: ConsumeTypeView?
-    var topView: AddTopView?
-    var keyboardView: KeyboardView?
-    var inputAmountView: Add_InputAmountView?
-    var remarkView: RemarkView?
-    var isSwitchFirstResponder: Bool = true
-    var selectDateView: SelectDateView?
     weak var delegate: AddViewControllerDelegate?
+
+    private var spendingModel: ConsumeTypeModel?
+    private var incomeModel: ConsumeTypeModel?
+    private var consumeTypeView: ConsumeTypeView?
+    private var topView: AddTopView?
+    private var keyboardView: KeyboardView?
+    private var inputAmountView: Add_InputAmountView?
+    private var remarkView: RemarkView?
+    private var isSwitchFirstResponder: Bool = true
+    private var selectDateView: SelectDateView?
     
-    
-    lazy var datePicker: DateShownView = {
+    private lazy var datePicker: DateShownView = {
         let dateShown: DateShownView = DateShownView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: autoScaleNomarl(value: 220)))
         dateShown.delegate = self
         return dateShown
@@ -64,9 +63,7 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         movementEnd()
-        
     }
     
     
@@ -178,6 +175,9 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
             format.dateFormat = "yyyy/MM/dd"
             let nowDateString = format.string(from: nowDate)
             self.selectDateView?.setTitle(title: nowDateString)
+            
+            self.remarkView?.setText(text: self.tallyModel?.remark ?? "")
+            
         }
         
     }

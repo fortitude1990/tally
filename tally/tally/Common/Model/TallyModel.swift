@@ -20,5 +20,24 @@ class TallyModel: NSObject {
     var date: String?
     var remark: String?
     
+    override init() {
+        super.init()
+    }
+    
+    init(tallList: TallyList){
+    
+        self.amount = tallList.amount
+        self.date = tallList.date
+        self.remark = tallList.remark
+        
+       let consumeType = ConsumeTypeModel.init()
+        consumeType.name = tallList.consumeType
+        if tallList.tallyType == 1{
+            consumeType.tallyType = .spending
+        }else{
+            consumeType.tallyType = .income
+        }
+        self.consumeType = consumeType
+    }
     
 }

@@ -32,6 +32,7 @@ class CustomDatePicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     var days: NSMutableArray = NSMutableArray.init()
     var components: Int = 1
     var picker: UIPickerView?
+    var okBtn: UIButton?
     
     private var _type: CustomDatePickerType = CustomDatePickerType.years
     var type: CustomDatePickerType{
@@ -73,6 +74,17 @@ class CustomDatePicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         get{
             return _type
         }
+    }
+    
+     // MARK: - Responder
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        
+        if point.y > 0 && point.y < 48 && point.x > self.frame.width / 2.0{
+            return self.okBtn
+        }
+        
+        return super.hitTest(point, with: event)
     }
     
     
@@ -131,6 +143,7 @@ class CustomDatePicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             make.right.equalTo(-15)
             make.centerY.equalTo(topView)
         }
+        self.okBtn = okBtn
         
         let lineColor: UIColor = UIColor.init(red: 220/255.0, green: 220/255.0, blue: 220/255.0, alpha: 1.0)
         

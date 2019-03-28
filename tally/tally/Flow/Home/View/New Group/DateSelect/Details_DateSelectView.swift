@@ -68,13 +68,13 @@ class Details_DateSelectView: UIView, CustomDatePickerDelegate {
     
      // MARK: - Responder
     
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        
-        if point.y < self.frame.height - (self.picker?.frame ?? CGRect.zero).height - 5 && point.y >= 0{
-            return self
-        }
-        return super.hitTest(point, with: event)
-    }
+//    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+//        
+//        if point.y < self.frame.height - (self.picker?.frame ?? CGRect.zero).height - 5 && point.y >= 0{
+//            return self
+//        }
+//        return super.hitTest(point, with: event)
+//    }
     
      // MARK: - CustomDatePickerDelegate
     

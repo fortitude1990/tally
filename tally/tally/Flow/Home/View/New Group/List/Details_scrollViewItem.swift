@@ -10,7 +10,7 @@ import UIKit
 
 @objc protocol Details_scrollViewItemDelegate: NSObjectProtocol{
     @objc optional func tableView(delete tally: TallyList)
-    @objc optional func tableView(didSelect tally: TallyList)
+    @objc optional func tableView(didSelect tally: TallyList, indexPath: IndexPath, InView item: Details_scrollViewItem)
     @objc optional func loadMore()
     @objc optional func pullRefresh()
 
@@ -147,6 +147,41 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
         
     }
     
+     // MARK: - Methods
+    
+    @discardableResult func deleteRow(indexPath: IndexPath){
+        
+        let array: [TallyList] = self.dataArray.object(at: indexPath.section) as! Array
+        let tallyModel: TallyList = array[indexPath.row]
+        
+        if array.count > 2{
+            let arr: NSMutableArray = NSMutableArray.init(array: array as NSArray)
+            arr.removeObject(at: indexPath.row)
+            self.dataArray.replaceObject(at: indexPath.section, with: arr)
+            self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+        }else{
+            self.dataArray.removeObject(at: indexPath.section)
+            self.tableView.deleteSections(IndexSet.init(arrayLiteral: indexPath.section), with: UITableView.RowAnimation.fade)
+        }
+        
+        
+        
+        DispatchQueue.global().async {
+            
+            let sqlManager: SqlManager = SqlManager.shareInstance
+            let result = sqlManager.tallylist_delete(id: tallyModel.id)
+            if result {
+                sqlManager.summary_update(tally: tallyModel, type: SqlManager.SummaryType.reduce)
+            }
+            DispatchQueue.main.async {
+                self.delegate?.tableView!(delete: tallyModel)
+            }
+            
+        }
+        
+        
+    }
+    
      // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -169,7 +204,7 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
         
         let array: [TallyList] = self.dataArray.object(at: indexPath.section) as! Array
         let tallyModel = array[indexPath.row]
-        self.delegate?.tableView!(didSelect: tallyModel)
+        self.delegate?.tableView!(didSelect: tallyModel, indexPath: indexPath, InView: self)
         
     }
     
@@ -227,37 +262,7 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == UITableViewCell.EditingStyle.delete{
-            
-            let array: [TallyList] = self.dataArray.object(at: indexPath.section) as! Array
-            let tallyModel: TallyList = array[indexPath.row]
-
-            if array.count > 2{
-                let arr: NSMutableArray = NSMutableArray.init(array: array as NSArray)
-                arr.removeObject(at: indexPath.row)
-                self.dataArray.replaceObject(at: indexPath.section, with: arr)
-                self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
-            }else{
-                self.dataArray.removeObject(at: indexPath.section)
-                self.tableView.deleteSections(IndexSet.init(arrayLiteral: indexPath.section), with: UITableView.RowAnimation.fade)
-            }
-            
-
-            
-            DispatchQueue.global().async {
-                
-                let sqlManager: SqlManager = SqlManager.shareInstance
-                let result = sqlManager.tallylist_delete(id: tallyModel.id)
-                if result {
-                    sqlManager.summary_update(tally: tallyModel, type: SqlManager.SummaryType.reduce)
-                }
-                DispatchQueue.main.async {
-                    self.delegate?.tableView!(delete: tallyModel)
-                }
-                
-            }
-            
-            
-            
+            self.deleteRow(indexPath: indexPath)
         }
     }
     

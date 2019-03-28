@@ -53,6 +53,9 @@ class SqlManager: NSObject {
         return tally_tb.delete(id: id)
     }
   
+    func tallylist_update(tally: TallyList) -> Bool {
+        return tally_tb.update(record: tally)
+    }
      // MARK: - SummaryTallyTable
     
     func summary_create() -> Bool {

@@ -27,7 +27,7 @@ let kScreenWidth = UIScreen.main.bounds.size.width
 //屏幕高度
 let kScreenHeight = UIScreen.main.bounds.size.height
 //主题颜色
-let themeColor = UIColor.init(hexColor: "1296db")
+let themeColor = UIColor.init(red: 0, green: 153 / 255.0, blue: 217 / 255.0, alpha: 1.0)
 //系统版本号
 let systemVersion =  (UIDevice.current.systemVersion as NSString).floatValue
 

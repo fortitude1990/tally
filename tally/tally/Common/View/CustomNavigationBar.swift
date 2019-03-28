@@ -45,7 +45,7 @@ class CustomNavigationBar: UIView {
         self.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth, height: kNavigationHeight)
         
         let titleLabel: UILabel = UILabel.init()
-        titleLabel.font = UIFont.systemFont(ofSize: 21)
+        titleLabel.font = UIFont.systemFont(ofSize: 17)
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "卡宝·记账"
         self.addSubview(titleLabel)

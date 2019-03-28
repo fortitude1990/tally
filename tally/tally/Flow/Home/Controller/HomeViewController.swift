@@ -153,9 +153,16 @@ class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Deta
         
     }
     
-    func tableView(didSelect tally: TallyList) {
+    func tableView(didSelect tally: TallyList, indexPath: IndexPath, InView item: Details_scrollViewItem) {
         let billingDetailsVC = BillingDetailsViewController.init()
         billingDetailsVC.hidesBottomBarWhenPushed = true
+        billingDetailsVC.tallyModel = tally
+        billingDetailsVC.del { (tallyList) in
+            item.deleteRow(indexPath: indexPath)
+        }
+        billingDetailsVC.edit { (date) in
+            self.loadData(loadDate: date)
+        }
         self.navigationController?.pushViewController(billingDetailsVC, animated: true)
     }
     
@@ -205,11 +212,7 @@ class HomeViewController: UIViewController, Details_scrollViewItemDelegate, Deta
         
 
 
-
-        
     }
-    
-    
     
     
 }

@@ -13,6 +13,7 @@ class CalendarHelper: NSObject {
 
 
     
+    
   static func days(month: String) -> Int{
 
        let oneState = ["2", "02"]
@@ -48,12 +49,13 @@ class CalendarHelper: NSObject {
     }
     
     
+    
     static func weekday(date: Date) -> String {
         
         let weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
         
         var calendar = Calendar.init(identifier: Calendar.Identifier.gregorian)
-        let timeZone = TimeZone.init(identifier: "Chinese")
+        let timeZone = TimeZone.init(identifier: "Asia/Shanghai")
         calendar.timeZone = timeZone!
         let components = calendar.component(Calendar.Component.weekday, from: date)
         return weekDays[components]
@@ -207,4 +209,10 @@ class CalendarHelper: NSObject {
         
         return date
     }
+    
+    static func weekDay(dateString: String, format: String) -> String {
+        let date = CalendarHelper.date(dateString: dateString, dateFormat: format)
+        return CalendarHelper.weekday(date: date)
+    }
+    
 }

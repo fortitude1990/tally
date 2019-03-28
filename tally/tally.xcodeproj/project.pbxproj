@@ -51,6 +51,7 @@
 		13B60E512238FA1300A72CBC /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B60E502238FA1300A72CBC /* SelectDateView.swift */; };
 		13B60E542238FD5A00A72CBC /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B60E532238FD5A00A72CBC /* TodayView.swift */; };
 		13B60E582239117300A72CBC /* RemarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B60E5622390B4500A72CBC /* RemarkView.swift */; };
+		13C291AF224C929400FA123C /* BillingDetails_BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C291AE224C929400FA123C /* BillingDetails_BottomView.swift */; };
 		13D5C6F4223D354F005FC8BB /* Details_TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D5C6F3223D354F005FC8BB /* Details_TopView.swift */; };
 		13D5C6F9223D3BCE005FC8BB /* 汉仪细行楷简.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13D5C6F8223D3BCE005FC8BB /* 汉仪细行楷简.ttf */; };
 		13DD2DA5223A5187008F9B6B /* DateShownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD2DA4223A5187008F9B6B /* DateShownView.swift */; };
@@ -113,6 +114,7 @@
 		13B60E502238FA1300A72CBC /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		13B60E532238FD5A00A72CBC /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		13B60E5622390B4500A72CBC /* RemarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemarkView.swift; sourceTree = "<group>"; };
+		13C291AE224C929400FA123C /* BillingDetails_BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingDetails_BottomView.swift; sourceTree = "<group>"; };
 		13D5C6F3223D354F005FC8BB /* Details_TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details_TopView.swift; sourceTree = "<group>"; };
 		13D5C6F8223D3BCE005FC8BB /* 汉仪细行楷简.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "汉仪细行楷简.ttf"; sourceTree = "<group>"; };
 		13DD2DA4223A5187008F9B6B /* DateShownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateShownView.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 		13708A09224366D7005DCDE2 /* BillingDetails */ = {
 			isa = PBXGroup;
 			children = (
+				13C291AE224C929400FA123C /* BillingDetails_BottomView.swift */,
 			);
 			path = BillingDetails;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				13E68FBB223CFD170060B106 /* TallyList.swift in Sources */,
 				133E7BE4222FA81A004D79CC /* Common.swift in Sources */,
 				133E7BE8222FAE22004D79CC /* HomeViewController.swift in Sources */,
+				13C291AF224C929400FA123C /* BillingDetails_BottomView.swift in Sources */,
 				1346135A2230F1FA00E9136E /* UIColorExtension.swift in Sources */,
 				13838E1E22321255007934E0 /* Add_InputAmountView.swift in Sources */,
 				13E68FB9223CF7510060B106 /* TallyTable.swift in Sources */,

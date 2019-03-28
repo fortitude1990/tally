@@ -80,6 +80,10 @@ class RemarkView: UIView, UITextViewDelegate {
         self.remarkTV.becomeFirstResponder()
     }
     
+    func setText(text: String) -> Void {
+        self.remarkTV.text = text
+    }
+    
      // MARK: - UITextViewDelegate
     
     func textViewDidBeginEditing(_ textView: UITextView) {

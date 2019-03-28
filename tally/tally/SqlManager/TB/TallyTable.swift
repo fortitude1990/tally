@@ -54,6 +54,17 @@ class TallyTable: NSObject {
         }
     }
     
+    func update(record tally: TallyList) -> Bool {
+        do {
+            let db = try Connection(SqlManager.getPath())
+            let update = try db.prepare("UPDATE tallyList SET userid = ?,amount = ?, date = ?,remark = ?, consumetype = ?, tallytype = ? WHERE id = ?")
+            try update.run(tally.userid, tally.amount, tally.date, tally.remark, tally.consumeType, tally.tallyType, tally.id)
+            return true
+        } catch  {
+            return false
+        }
+    }
+    
     func query(date: String, userid: String) -> [TallyList] {
         
         let array: NSMutableArray = NSMutableArray.init()
