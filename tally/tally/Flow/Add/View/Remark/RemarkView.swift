@@ -82,6 +82,23 @@ class RemarkView: UIView, UITextViewDelegate {
     
     func setText(text: String) -> Void {
         self.remarkTV.text = text
+        changeFrame(textView: self.remarkTV)
+    }
+    
+    func changeFrame(textView: UITextView) -> Void {
+        
+        var frame: CGRect = textView.frame
+        frame.size.height = textView.contentSize.height
+        textView.frame = frame
+        
+        var lineFrame: CGRect = self.line?.frame ?? CGRect.zero
+        lineFrame.origin.y = textView.frame.maxY
+        self.line?.frame = lineFrame
+        
+        var superViewFrame: CGRect = textView.superview?.frame ?? CGRect.zero
+        superViewFrame.size.height = frame.height + lineFrame.height
+        textView.superview?.frame = superViewFrame
+        
     }
     
      // MARK: - UITextViewDelegate
@@ -110,20 +127,9 @@ class RemarkView: UIView, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         
-        
 //        let rect: CGRect = (textView.text as NSString).boundingRect(with: CGSize.init(width: textView.frame.width, height: 0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : textView.font ?? UIFont.systemFont(ofSize: 12)], context: nil)
         
-        var frame: CGRect = textView.frame
-        frame.size.height = textView.contentSize.height
-        textView.frame = frame
-        
-        var lineFrame: CGRect = self.line?.frame ?? CGRect.zero
-        lineFrame.origin.y = textView.frame.maxY
-        self.line?.frame = lineFrame
-        
-        var superViewFrame: CGRect = textView.superview?.frame ?? CGRect.zero
-        superViewFrame.size.height = frame.height + lineFrame.height
-        textView.superview?.frame = superViewFrame
+       changeFrame(textView: textView)
         
     }
     
