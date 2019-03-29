@@ -27,10 +27,7 @@
        src = "https://github.com/fortitude1990/tally/blob/master/images/2019-03-29%2013_40_57.gif" 
        width = "25%" 
        alt = "账单列表"/>
- <img style="float:left margin:20" 
-      src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG7.jpeg" 
-      width = "25%" 
-      alt = "添加"/>
+
 </div>
 
 ## 关于作者
