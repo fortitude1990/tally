@@ -15,6 +15,7 @@ class ConsumeTypeUICollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepare() {
         
        super.prepare()
+        
         self.attArray.removeAllObjects()
         //定义当前行数、页数变量
         var lineNum: NSInteger = 1;
@@ -23,8 +24,7 @@ class ConsumeTypeUICollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         let originX: CGFloat = self.collectionView?.frame.width ?? 0
         let attWidth: CGFloat =  (self.collectionView?.frame.width ?? 0 - 22) / 5
-//        let attHeight: CGFloat = (self.collectionView?.frame.width ?? 0 - 22) / 5.5;
-//        let attWidth: CGFloat =  self.itemSize.width
+
         let attHeight: CGFloat = self.itemSize.height;
 
         let items: NSInteger = self.collectionView?.numberOfItems(inSection: 0) ?? 0
@@ -76,7 +76,6 @@ class ConsumeTypeUICollectionViewFlowLayout: UICollectionViewFlowLayout {
                 array.add(att)
             }
         }
-        
         return array as? [UICollectionViewLayoutAttributes]
     }
     
