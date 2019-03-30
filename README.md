@@ -215,24 +215,24 @@ func getHostView() -> UIView {
 
 <div>
   <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/2019-03-29%2013_40_57.gif" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG3.jpeg" 
        width = "25%" 
        alt = "账单列表"/>
     <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/2019-03-29%2013_40_57.gif" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG4.jpeg" 
        width = "25%" 
-       alt = "账单列表"/>
+       alt = "详情"/>
     <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/2019-03-29%2013_40_57.gif" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG7.jpeg" 
        width = "25%" 
-       alt = "账单列表"/>
+       alt = "添加"/>
 </div>
 
 ## 动效
 
 <div>
   <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/2019-03-29%2013_40_57.gif" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/tally%E5%8A%A8%E7%94%BB.gif" 
        width = "25%" 
        alt = "账单列表"/>
 </div>
