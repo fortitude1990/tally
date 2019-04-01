@@ -119,7 +119,7 @@ var attArray: NSMutableArray = NSMutableArray.init()
 
 实现下滑退出功能，是在touchesMoved里获取手指滑动的竖向距离，来改变self.view的frame，然后判断frame.maxY是否大于临界值，大于临界值就退出，小于临界值就恢复原样。在self.view上添加了UICollectionView，手指放在UICollectionView，touchesMoved函数无响应，所以就出现了手指在UICollectionView上无法竖向滑动的问题
 
-1) 为了解决这个问题，首先想到了让UICollectionView的touchesMoved传递到self.view层，让self.view层的touchesMoved有响应
+1）为了解决这个问题，首先想到了让UICollectionView的touchesMoved传递到self.view层，让self.view层的touchesMoved有响应
 ```
 extension UICollectionView{
     
