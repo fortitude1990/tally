@@ -8,6 +8,32 @@
 * [SnapKit](https://github.com/SnapKit/SnapKit)
 * [SQLite.swift](https://github.com/stephencelis/SQLite.swift)
 
+## 截图
+
+<div>
+  <img style="float:left margin:20" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG3.jpeg" 
+       width = "25%" 
+       alt = "账单列表"/>
+    <img style="float:left margin:20" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG4.jpeg" 
+       width = "25%" 
+       alt = "详情"/>
+    <img style="float:left margin:20" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG7.jpeg" 
+       width = "25%" 
+       alt = "添加"/>
+</div>
+
+## 动效
+
+<div>
+  <img style="float:left margin:20" 
+       src = "https://github.com/fortitude1990/tally/blob/master/images/tally%E5%8A%A8%E7%94%BB.gif" 
+       width = "25%" 
+       alt = "账单列表"/>
+</div>
+
 ## 开发中遇到的问题
 ### 1、如何让UICollectionView横向翻页滑动
 自定义UICollectionViewFlowLayout
@@ -205,37 +231,6 @@ func getHostView() -> UIView {
            
     }
 ```
-
-## 奇葩问题
-* [代理函数中使用switch，只写一个case下，导致代理函数偶尔无响应](https://www.jianshu.com/p/cde8150f4b2a)
-
-
-
-## 样图
-
-<div>
-  <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG3.jpeg" 
-       width = "25%" 
-       alt = "账单列表"/>
-    <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG4.jpeg" 
-       width = "25%" 
-       alt = "详情"/>
-    <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/WechatIMG7.jpeg" 
-       width = "25%" 
-       alt = "添加"/>
-</div>
-
-## 动效
-
-<div>
-  <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/tally%E5%8A%A8%E7%94%BB.gif" 
-       width = "25%" 
-       alt = "账单列表"/>
-</div>
 
 ## 结语
 这里只是记录一下在项目中遇到的问题，及解决方案的思考
