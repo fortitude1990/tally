@@ -52,6 +52,7 @@ class DetailsTopView_DateShowView: UIView {
         self.titleLabel?.text = "03月"
         self.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 21)
         self.titleLabel?.textColor = UIColor.init(red: 31 / 255.0, green: 31 / 255.0, blue: 31 / 255.0, alpha: 1.0)
+//        self.titleLabel?.textColor = UIColor.white
         self.titleLabel?.isUserInteractionEnabled = true
         self.addSubview(self.titleLabel ?? UIView.init())
         self.titleLabel?.snp.makeConstraints({ (make) in

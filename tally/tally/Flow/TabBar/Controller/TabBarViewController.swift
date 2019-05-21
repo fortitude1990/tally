@@ -37,9 +37,9 @@ class TabBarViewController: UITabBarController, AddViewControllerDelegate {
         
         let homeVC:HomeViewController = HomeViewController.init()
         let homeNavC: UINavigationController = UINavigationController.init(rootViewController: homeVC)
-        let homeVC1:ViewController = ViewController.init()
-        let homeNavC1: UINavigationController = UINavigationController.init(rootViewController: homeVC1)
-        self.viewControllers = [homeNavC, homeNavC1]
+        let reportFormsVC:ReportFormsViewController = ReportFormsViewController.init()
+        let reportFormsNavC: UINavigationController = UINavigationController.init(rootViewController: reportFormsVC)
+        self.viewControllers = [homeNavC, reportFormsNavC]
 
         self.homeViewController = homeVC
         

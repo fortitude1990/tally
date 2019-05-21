@@ -62,6 +62,7 @@ class Details_TopView: UIView {
         let titleLabel: UILabel = UILabel.init()
         titleLabel.font = UIFont.init(name: "HYi2gj", size: 24)
         titleLabel.textAlignment = NSTextAlignment.center
+//        titleLabel.textColor = UIColor.white
         titleLabel.text = "熊猫·记账"
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
@@ -137,6 +138,7 @@ class Details_TopView: UIView {
         spendingAmountLabel.font = UIFont.init(name: "PingFangSC-Regular", size: 21)
         spendingAmountLabel.text = "0.00"
         spendingAmountLabel.textColor = UIColor.init(red: 31 / 255.0, green: 31 / 255.0, blue: 31 / 255.0, alpha: 1.0)
+//        spendingAmountLabel.textColor = UIColor.white;
         twoView.addSubview(spendingAmountLabel)
         spendingAmountLabel.snp.makeConstraints { (make) in
             make.right.bottom.equalTo(0)
@@ -149,6 +151,7 @@ class Details_TopView: UIView {
         incomeAmountLabel.font = UIFont.init(name: "PingFangSC-Regular", size: 21)
         incomeAmountLabel.text = "0.00"
         incomeAmountLabel.textColor = UIColor.init(red: 31 / 255.0, green: 31 / 255.0, blue: 31 / 255.0, alpha: 1.0)
+//        incomeAmountLabel.textColor = UIColor.white
         twoView.addSubview(incomeAmountLabel)
         incomeAmountLabel.snp.makeConstraints { (make) in
             make.left.bottom.equalTo(0)
