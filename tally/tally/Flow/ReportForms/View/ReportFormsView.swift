@@ -109,8 +109,8 @@ class ReportFormsView: UIView {
         let context: CGContext! = UIGraphicsGetCurrentContext()
         
         var color: UIColor = UIColor.init(red: 231 / 255.0, green: 231 / 255.0, blue: 231 / 255.0, alpha: 1.0)
-        var startAngle: Double = 0.00
-        var endAngle: Double = 0.00
+        var startAngle: Double = self.startAngle
+        var endAngle: Double = self.endAngle
         
         if self.params.count == 0 {
             

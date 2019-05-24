@@ -58,7 +58,10 @@ class CalendarHelper: NSObject {
         let timeZone = TimeZone.init(identifier: "Asia/Shanghai")
         calendar.timeZone = timeZone!
         let components = calendar.component(Calendar.Component.weekday, from: date)
-        return weekDays[components]
+        if components < 8 && components > 0 {
+            return weekDays[components - 1]
+        }
+        return ""
         
     }
     
