@@ -13,6 +13,8 @@ class ConsumeType: NSObject {
     var id: Int64 = 0
     var keyName: String?
     var keyValue: String?
+    var count: Int64 = 0
     var pid: Int64 = 0
+    
     
 }

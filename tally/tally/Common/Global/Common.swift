@@ -29,6 +29,9 @@ let kScreenHeight = UIScreen.main.bounds.size.height
 //主题颜色
 //let themeColor = UIColor.init(red: 0, green: 153 / 255.0, blue: 217 / 255.0, alpha: 1.0)
 let themeColor = UIColor.init(red: 240 / 255.0, green: 123 / 255.0, blue: 114 / 255.0, alpha: 1.0)
+//收入主题色
+let incomeColor = UIColor.init(red: 0, green: 179 / 255.0, blue: 125 / 255.0, alpha: 1.0)
+
 
 //系统版本号
 let systemVersion =  (UIDevice.current.systemVersion as NSString).floatValue

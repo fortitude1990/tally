@@ -65,7 +65,12 @@
 		13E68FBB223CFD170060B106 /* TallyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E68FBA223CFD170060B106 /* TallyList.swift */; };
 		13F1673E22377CD20018E908 /* MyBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1673D22377CD20018E908 /* MyBtn.swift */; };
 		5578B761E51E9BBDBF38D452 /* Pods_tally.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26979D66EE8C53092435A99 /* Pods_tally.framework */; };
-		B61FE9202293BFF100E244E2 /* ReportFormsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE91F2293BFF000E244E2 /* ReportFormsAnimation.swift */; };
+		B6162CEF229796F2004F4EC7 /* ReportFormsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6162CEE229796F2004F4EC7 /* ReportFormsModel.swift */; };
+		B61D841522954FB6004ABF48 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D841422954FB6004ABF48 /* SelectView.swift */; };
+		B61FE9202293BFF100E244E2 /* ReportFormsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE91F2293BFF000E244E2 /* ReportFormsView.swift */; };
+		B61FE9222293C66800E244E2 /* ReportFormsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE9212293C66800E244E2 /* ReportFormsTableViewCell.swift */; };
+		B61FE9242293E70000E244E2 /* ReportFormsDateSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE9232293E70000E244E2 /* ReportFormsDateSelectView.swift */; };
+		B61FE9262293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE9252293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift */; };
 		B6213D61228C3DB000DB275D /* ReportFormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6213D60228C3DB000DB275D /* ReportFormsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -132,7 +137,12 @@
 		19588EB29233DC090F335142 /* Pods-tally.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tally.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tally/Pods-tally.debug.xcconfig"; sourceTree = "<group>"; };
 		473828AB58C467331F7C001C /* Pods-tally.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tally.release.xcconfig"; path = "Pods/Target Support Files/Pods-tally/Pods-tally.release.xcconfig"; sourceTree = "<group>"; };
 		B26979D66EE8C53092435A99 /* Pods_tally.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tally.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B61FE91F2293BFF000E244E2 /* ReportFormsAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportFormsAnimation.swift; sourceTree = "<group>"; };
+		B6162CEE229796F2004F4EC7 /* ReportFormsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsModel.swift; sourceTree = "<group>"; };
+		B61D841422954FB6004ABF48 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
+		B61FE91F2293BFF000E244E2 /* ReportFormsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportFormsView.swift; sourceTree = "<group>"; };
+		B61FE9212293C66800E244E2 /* ReportFormsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsTableViewCell.swift; sourceTree = "<group>"; };
+		B61FE9232293E70000E244E2 /* ReportFormsDateSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsDateSelectView.swift; sourceTree = "<group>"; };
+		B61FE9252293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsDateSelectTableViewCell.swift; sourceTree = "<group>"; };
 		B6213D60228C3DB000DB275D /* ReportFormsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -341,6 +351,7 @@
 		136C19D3224DBC4700E7D2D2 /* ReportForms */ = {
 			isa = PBXGroup;
 			children = (
+				B617BA24229687D300244ABD /* Model */,
 				B6213D5F228C170400DB275D /* View */,
 				B6213D5E228C16F900DB275D /* Controller */,
 			);
@@ -522,6 +533,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B617BA24229687D300244ABD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B6162CEE229796F2004F4EC7 /* ReportFormsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B61FE9272293ECEF00E244E2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B61FE9252293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift */,
+				B61FE9212293C66800E244E2 /* ReportFormsTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		B6213D5E228C16F900DB275D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,7 +561,10 @@
 		B6213D5F228C170400DB275D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B61FE91F2293BFF000E244E2 /* ReportFormsAnimation.swift */,
+				B61FE9272293ECEF00E244E2 /* Cell */,
+				B61FE91F2293BFF000E244E2 /* ReportFormsView.swift */,
+				B61FE9232293E70000E244E2 /* ReportFormsDateSelectView.swift */,
+				B61D841422954FB6004ABF48 /* SelectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -679,14 +710,17 @@
 				13A1E3E82242378800AE9FAD /* CustomDatePicker.swift in Sources */,
 				1303C8D52240B3AD00C7D701 /* ConsumeTypeTable.swift in Sources */,
 				13E68FB7223CEEB40060B106 /* User.swift in Sources */,
+				B61FE9222293C66800E244E2 /* ReportFormsTableViewCell.swift in Sources */,
 				13088175224B766800E9CFC3 /* RefreshComponent.swift in Sources */,
 				1303C8D72240B75100C7D701 /* Summary.swift in Sources */,
 				13B60E582239117300A72CBC /* RemarkView.swift in Sources */,
 				1323E3D122366C54008AE30E /* ConsumeTypeView.swift in Sources */,
+				B61FE9242293E70000E244E2 /* ReportFormsDateSelectView.swift in Sources */,
 				13708A0B2243827A005DCDE2 /* CustomNavigationBar.swift in Sources */,
 				13708A0F2243854A005DCDE2 /* BillingDetailsViewController.swift in Sources */,
 				1368F497223E80630053CF28 /* Details_scrollViewItem.swift in Sources */,
 				13088173224B757000E9CFC3 /* HeaderRefreshComponent.swift in Sources */,
+				B6162CEF229796F2004F4EC7 /* ReportFormsModel.swift in Sources */,
 				1392E510223BAE17007A4C59 /* TallyModel.swift in Sources */,
 				B6213D61228C3DB000DB275D /* ReportFormsViewController.swift in Sources */,
 				13A1E3E62241E84400AE9FAD /* DetailsTopView_DateShowView.swift in Sources */,
@@ -705,6 +739,7 @@
 				13DD2DA5223A5187008F9B6B /* DateShownView.swift in Sources */,
 				134613602231061800E9136E /* Key.swift in Sources */,
 				1308816E224B22A000E9CFC3 /* LightRefresh.swift in Sources */,
+				B61FE9262293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift in Sources */,
 				133E7BCB222F96B3004D79CC /* tally.xcdatamodeld in Sources */,
 				13E68FBB223CFD170060B106 /* TallyList.swift in Sources */,
 				133E7BE4222FA81A004D79CC /* Common.swift in Sources */,
@@ -723,10 +758,11 @@
 				130EB567223FA85C00963016 /* TallyListHeaderModel.swift in Sources */,
 				13088171224B455800E9CFC3 /* FooterRefreshComponent.swift in Sources */,
 				134613562230C38D00E9136E /* AddTopView.swift in Sources */,
+				B61D841522954FB6004ABF48 /* SelectView.swift in Sources */,
 				13B60E542238FD5A00A72CBC /* TodayView.swift in Sources */,
 				1368F499223E83AD0053CF28 /* Details_ListTableViewCell.swift in Sources */,
 				13838E2522326895007934E0 /* ConsumeTypeCollectionViewCell.swift in Sources */,
-				B61FE9202293BFF100E244E2 /* ReportFormsAnimation.swift in Sources */,
+				B61FE9202293BFF100E244E2 /* ReportFormsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

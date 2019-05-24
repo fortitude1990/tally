@@ -12,6 +12,8 @@ import UIKit
     @objc optional func addComplete(tally: TallyModel)
 }
 
+
+
 class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardViewDelegate, RemarkViewDelegate, DateShownViewDelegate, SelectDateViewDelegate, Add_InputAmountViewDelegate {
 
     enum MovementSpaceType {
@@ -342,8 +344,9 @@ class AddViewController: UIViewController, ConsumeTypeViewDelegate, KeyboardView
         
         self.tallyModel?.amount = self.getAmount()
         
+        self.delegate?.addComplete!(tally: self.tallyModel ?? TallyModel.init())
+        
         self.dismiss(animated: true) {
-            self.delegate?.addComplete!(tally: self.tallyModel ?? TallyModel.init())
         }
         
     }

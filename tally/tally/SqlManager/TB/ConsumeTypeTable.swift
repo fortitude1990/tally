@@ -17,6 +17,7 @@ class ConsumeTypeTable: NSObject {
     let ID = Expression<Int64>("id")
     let KEYNAME = Expression<String>("keyname")
     let KEYVALUE = Expression<String>("keyvalue")
+    let COUNT = Expression<Int64>("count")
     let PID = Expression<Int64>("pid") //关联表ID
     
     func create() -> Bool {
@@ -27,6 +28,7 @@ class ConsumeTypeTable: NSObject {
                 table.column(KEYNAME)
                 table.column(KEYVALUE)
                 table.column(PID)
+                table.column(COUNT)
             })
             return true
         }catch{
@@ -34,13 +36,13 @@ class ConsumeTypeTable: NSObject {
         }
     }
     
-    func insert(consumerType: ConsumeType) -> Bool {
+    func insert(consumeType: ConsumeType) -> Bool {
         
         
         do {
             let db = try Connection(SqlManager.getPath())
-            let insert = try db.prepare("INSERT INTO consumetype (keyname, keyvalue, pid) VALUES (?, ?, ?)")
-            try insert.run(consumerType.keyName, consumerType.keyValue, consumerType.pid)
+            let insert = try db.prepare("INSERT INTO consumetype (keyname, keyvalue, pid, count) VALUES (?, ?, ?, ?)")
+            try insert.run(consumeType.keyName, consumeType.keyValue, consumeType.pid, consumeType.count)
             
             return true
         }catch{
@@ -63,6 +65,7 @@ class ConsumeTypeTable: NSObject {
                 consumeType.keyName = try row.get(KEYNAME)
                 consumeType.keyValue = try row.get(KEYVALUE)
                 consumeType.pid = try row.get(PID)
+                consumeType.count = try row.get(COUNT)
                 array.add(consumeType)
             }
             
@@ -86,12 +89,12 @@ class ConsumeTypeTable: NSObject {
         }
     }
     
-    func update(keyValue: String, id: Int64) -> Bool {
+    func update(keyValue: String, count: Int64, id: Int64) -> Bool {
         
         do{
             let db = try Connection(SqlManager.getPath())
-            let update = try db.prepare("UPDATE consumetype SET keyvalue = ? WHERE id = ?")
-            try update.run(keyValue, id)
+            let update = try db.prepare("UPDATE consumetype SET keyvalue = ?, count = ? WHERE id = ?")
+            try update.run(keyValue,count,id)
             return true
         }catch{
             return false

@@ -11,6 +11,7 @@ import UIKit
 class TabBarViewController: UITabBarController, AddViewControllerDelegate {
 
     var homeViewController: HomeViewController?
+    var customTabBar:CustomTabBar?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +64,8 @@ class TabBarViewController: UITabBarController, AddViewControllerDelegate {
         self.tabBar.backgroundImage = UIImage.init()
         self.tabBar.shadowImage = UIImage.init()
         
+        self.customTabBar = customTabBar
+        
         
         
         
@@ -82,6 +85,7 @@ class TabBarViewController: UITabBarController, AddViewControllerDelegate {
     
     func addComplete(tally: TallyModel) {
         
+        
         DispatchQueue.main.async {
             
             let aTally: TallyList = TallyList.init(tally: tally)
@@ -94,6 +98,11 @@ class TabBarViewController: UITabBarController, AddViewControllerDelegate {
                 if result1{
                     let date: String = CalendarHelper.dateString(date: tally.date ?? "", originFromat: "yyyyMMdd", resultFromat: "yyyyMM")
                     self.homeViewController?.loadData(loadDate: date)
+                    self.selectedIndex = 0
+                    let tabBarItem: UITabBarItem = self.customTabBar?.items?[0] ?? UITabBarItem.init()
+                    self.customTabBar?.selectedItem = tabBarItem
+                    
+
                 }
             }else{
                 print("list数据插入失败")

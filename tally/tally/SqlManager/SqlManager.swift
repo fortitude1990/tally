@@ -119,7 +119,8 @@ class SqlManager: NSObject {
                 consumeType.keyName = tally.consumeType
                 consumeType.keyValue = tally.amount
                 consumeType.pid = monthly_id
-                result = consumetype_tb.insert(consumerType: consumeType)
+                consumeType.count = 1
+                result = consumetype_tb.insert(consumeType: consumeType)
                 if result == false{
                     print("月度：consumetype_tb.insert失败")
                     return false
@@ -152,14 +153,15 @@ class SqlManager: NSObject {
                     
                     var sum1: Float = 0.00
                     if type == SummaryType.add{
-                        sum1 = (monthly_summary.totalamount! as NSString).floatValue + (tally.amount! as NSString).floatValue
+                        sum1 = (consumeType.keyValue! as NSString).floatValue + (tally.amount! as NSString).floatValue
+                        consumeType.count += 1
                     }else{
-                        sum1 = (monthly_summary.totalamount! as NSString).floatValue - (tally.amount! as NSString).floatValue
+                        sum1 = (consumeType.keyValue! as NSString).floatValue - (tally.amount! as NSString).floatValue
+                        consumeType.count -= 1
                     }
                     
                     
-                    
-                    result = consumetype_tb.update(keyValue: String(format: "%.2lf", sum1), id: consumeType.id)
+                    result = consumetype_tb.update(keyValue: String(format: "%.2lf", sum1),count: consumeType.count, id: consumeType.id)
                     if result == false{
                         print("月度：consumetype_tb.update失败")
                         return false
@@ -175,8 +177,9 @@ class SqlManager: NSObject {
                 consumeType.keyName = tally.consumeType
                 consumeType.keyValue = tally.amount
                 consumeType.pid = monthly_summary.id
+                consumeType.count = 1
                 
-                result = consumetype_tb.insert(consumerType: consumeType)
+                result = consumetype_tb.insert(consumeType: consumeType)
                 
                 if result == false{
                     print("月度：consumetype_tb.insert失败")
@@ -201,6 +204,10 @@ class SqlManager: NSObject {
     
     func consumetype_create() -> Bool{
         return consumetype_tb.create()
+    }
+    
+    func consumetype_query(pid: Int64) -> [ConsumeType] {
+        return consumetype_tb.query(pid: pid)
     }
     
     
