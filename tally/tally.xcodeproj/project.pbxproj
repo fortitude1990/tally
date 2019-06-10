@@ -71,6 +71,7 @@
 		B61FE9222293C66800E244E2 /* ReportFormsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE9212293C66800E244E2 /* ReportFormsTableViewCell.swift */; };
 		B61FE9242293E70000E244E2 /* ReportFormsDateSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE9232293E70000E244E2 /* ReportFormsDateSelectView.swift */; };
 		B61FE9262293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE9252293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift */; };
+		B620DBF822A8EEE9007A479D /* DateSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620DBF722A8EEE9007A479D /* DateSelectView.swift */; };
 		B6213D61228C3DB000DB275D /* ReportFormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6213D60228C3DB000DB275D /* ReportFormsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +144,7 @@
 		B61FE9212293C66800E244E2 /* ReportFormsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsTableViewCell.swift; sourceTree = "<group>"; };
 		B61FE9232293E70000E244E2 /* ReportFormsDateSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsDateSelectView.swift; sourceTree = "<group>"; };
 		B61FE9252293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsDateSelectTableViewCell.swift; sourceTree = "<group>"; };
+		B620DBF722A8EEE9007A479D /* DateSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectView.swift; sourceTree = "<group>"; };
 		B6213D60228C3DB000DB275D /* ReportFormsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -565,6 +567,7 @@
 				B61FE91F2293BFF000E244E2 /* ReportFormsView.swift */,
 				B61FE9232293E70000E244E2 /* ReportFormsDateSelectView.swift */,
 				B61D841422954FB6004ABF48 /* SelectView.swift */,
+				B620DBF722A8EEE9007A479D /* DateSelectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				133E7BC5222F96B3004D79CC /* ViewController.swift in Sources */,
 				1346135C223100A600E9136E /* KeyboardView.swift in Sources */,
 				13F1673E22377CD20018E908 /* MyBtn.swift in Sources */,
+				B620DBF822A8EEE9007A479D /* DateSelectView.swift in Sources */,
 				13DD2DA5223A5187008F9B6B /* DateShownView.swift in Sources */,
 				134613602231061800E9136E /* Key.swift in Sources */,
 				1308816E224B22A000E9CFC3 /* LightRefresh.swift in Sources */,
@@ -910,7 +914,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S9MNYPW8DU;
+				DEVELOPMENT_TEAM = VFH99RF8KM;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = tally/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -918,7 +922,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.unspay.tally;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhijing.tally;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
@@ -932,7 +936,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S9MNYPW8DU;
+				DEVELOPMENT_TEAM = VFH99RF8KM;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = tally/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -940,7 +944,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.unspay.tally;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhijing.tally;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;

@@ -28,6 +28,7 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
     var dataArray: Array<Any>?
     var animatedflag: Bool = true
     var handler: ((NSInteger, NSInteger) ->Void)?
+    var selectYearCallback: ((NSInteger)->Void)?
     
     var _year: NSInteger = 2019
     var year: NSInteger {
@@ -91,6 +92,7 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
     func setupUI() -> Void {
         
         self.yearLabel = UILabel.init()
+        self.yearLabel?.isUserInteractionEnabled = true
         self.yearLabel?.text = ""
         self.yearLabel?.font = UIFont.init(name: "PingFang SC-Regular", size: 14)
         self.yearLabel?.textColor = UIColor.white
@@ -125,13 +127,14 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
             make.centerY.centerX.equalTo(view)
         }
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGestureAction(tap:)))
+        self.yearLabel?.addGestureRecognizer(tap)
+        
     }
     
     //MARK: - LoadData
     
-    func loadData() -> Void {
-        
-//        self.dataArray = ["1","2","3","4","5","6","7", "8","9","10","11","12"]
+    private func loadData() -> Void {
         
         self.dataArray = ["12","11","10","9","8","7","6", "5","4","3","2","1"]
 
@@ -144,16 +147,78 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
         let indexPath: IndexPath = IndexPath.init(row: 2, section: 0)
         self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
 
-
     }
     
     //MARK: - Methods
+    
+    func setDate(year: NSInteger, month: NSInteger) -> Void {
+        
+        if month == 0{
+            self.tableView.isHidden = true
+        }else{
+            self.tableView.isHidden = false
+            
+            let nowYear: String = CalendarHelper.nowDateString(dateFormat: "yyyy")
+            let noweYearValue: NSInteger = NSInteger.init(nowYear) ?? 1
+            let section: NSInteger = noweYearValue-year
+            if section >= 0{
+                
+                var row: NSInteger?
+                if section > 0{
+                    row = 12 - month
+                }else{
+                    let rowNum = self.tableView.numberOfRows(inSection: 0)
+                    if month > rowNum - 2{
+                        row = rowNum - 2
+                    }else{
+                        row = rowNum - month
+                    }
+                }
+                let indexPath: IndexPath = IndexPath.init(row: row ?? 0, section: section)
+                
+                self.animatedflag = false
+                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableView.ScrollPosition.none)
+                self.tableView.scrollToNearestSelectedRow(at: UITableView.ScrollPosition.none, animated: false)
+                self.setYearAndMonth(by: indexPath)
+                self.setTableContentOffset(indexPath: indexPath, animation: true) {
+                    self.animatedflag = true
+                }
+                
+            }
+            
+        }
+        
+        
+        
+    }
+    
+    func selectYearCallback(callback: @escaping (NSInteger)->Void) -> Void {
+        self.selectYearCallback = callback;
+    }
     
     func selectedDateCallback(callback: @escaping (NSInteger, NSInteger)->Void) -> Void {
         self.handler = callback;
     }
     
-    func setYearAndMonth(by indexPath: IndexPath) -> Void {
+    /*
+     *  只实用于手动点击跳动，不可使用于代码手动设置，因为使用了transform属性，偏移量有很大误差，
+     *  使用系统方法进行偏移，才能校正偏移误差
+     */
+    private func manualSelectedSetupOffset(indexPath: IndexPath) -> Void {
+        self.animatedflag = false
+        self.setYearAndMonth(by: indexPath)
+        self.setTableContentOffset(indexPath: indexPath, animation: true) {
+            self.animatedflag = true
+        }
+    }
+    
+    @objc private func tapGestureAction(tap: UITapGestureRecognizer){
+        if self.selectYearCallback != nil{
+            self.selectYearCallback?(self.year);
+        }
+    }
+    
+    private func setYearAndMonth(by indexPath: IndexPath) -> Void {
         if indexPath.section == 0{
             let monthString = CalendarHelper.nowDateString(dateFormat: "MM")
             let month: NSInteger = NSInteger(monthString) ?? 0
@@ -167,17 +232,17 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
         self.year -= indexPath.section
     }
 
-    func setTableContentOffset(indexPath:IndexPath, animation: Bool, complete: @escaping (()->Void)) -> Void {
+   private func setTableContentOffset(indexPath:IndexPath, animation: Bool, complete: @escaping (()->Void)) -> Void {
         
         var time: CGFloat = 0.00
         if animation {
             time = 0.2
         }
         
-        let height: CGFloat = 40
-        
+//        let height: CGFloat = 40
+    
         UIView.animate(withDuration: TimeInterval(time), animations: {
-            
+            /*
             let offsetCount: NSInteger
             if indexPath.section == 0{
                 offsetCount = indexPath.row - 2
@@ -186,6 +251,19 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
                 offsetCount = rowCount + 12 * (indexPath.section - 1) + indexPath.row - 2
             }
             self.tableView.setContentOffset(CGPoint.init(x: 0, y:  height * CGFloat(offsetCount)), animated: false)
+            */
+            
+            let cell: UITableViewCell = self.tableView.cellForRow(at: indexPath) ?? UITableViewCell.init()
+            
+            if  self.tableView.visibleCells.contains(cell){
+                
+                let rect: CGRect = cell.superview?.convert(cell.frame, to: self.tableView.superview) ?? CGRect.zero
+                let width = self.tableView.superview?.frame.width
+                
+                let  offsetY: CGFloat =  self.tableView.contentOffset.y + (width ?? 0) - rect.maxX - 40 * 2
+                self.tableView.setContentOffset(CGPoint.init(x: 0, y: offsetY), animated: false)
+            }
+            
             
         }) { (flag) in
             
@@ -221,13 +299,7 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       
-        self.animatedflag = false
-        self.setYearAndMonth(by: indexPath)
-        self.setTableContentOffset(indexPath: indexPath, animation: true) {
-            self.animatedflag = true
-        }
-        
+        self.manualSelectedSetupOffset(indexPath: indexPath)
         
     }
     

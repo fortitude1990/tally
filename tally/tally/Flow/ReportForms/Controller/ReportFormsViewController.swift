@@ -81,9 +81,9 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
         formsView.layer.shadowColor = UIColor.init(red: 215 / 255.0, green: 215 / 255.0, blue: 215 / 255.0, alpha: 1.0).cgColor
         formsView.layer.shadowOpacity = 1
         headerView.addSubview(formsView)
-        formsView.frame = CGRect.init(x: 15, y: 0, width: kScreenWidth - 15 * 2, height: headerView.bounds.height - 15)
+        formsView.frame = CGRect.init(x: 15, y: 15, width: kScreenWidth - 15 * 2, height: headerView.bounds.height - 15 * 2)
 
-        self.reportFormsView = ReportFormsView.init(frame: CGRect.init(x: 0, y: 80, width: formsView.frame.width, height: formsView.frame.height - 80 - 10))
+        self.reportFormsView = ReportFormsView.init(frame: CGRect.init(x: 0, y: 80, width: formsView.frame.width, height: formsView.frame.height - 70 - 10))
         formsView.addSubview(self.reportFormsView ?? UIView.init())
         
         formsView.addSubview(self.spendingSelectView)
@@ -121,6 +121,12 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
         
         return aTableView
     }()
+    
+    lazy var quickDateSelectView: DateSelectView = {
+        let aDateSelectView: DateSelectView = DateSelectView.init()
+        return aDateSelectView
+    }()
+    
     
     //MARK: - LifeCycle
     
@@ -161,7 +167,7 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
         self.view.addSubview(oneView)
         oneView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
-            make.height.equalTo(120 + kNavigationHeight)
+            make.height.equalTo(44 + 60 + kNavigationHeight)
         }
         
         let titleLabel = UILabel.init()
@@ -180,7 +186,7 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
         self.dateSelectView.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.right.left.equalTo(0)
-            make.height.equalTo(50)
+            make.height.equalTo(40)
         }
         
         self.view.addSubview(self.tableView)
@@ -190,9 +196,20 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
             make.bottom.equalTo(0)
         }
         
+        self.view.addSubview(self.quickDateSelectView)
+        self.quickDateSelectView.snp.makeConstraints { (make) in
+            make.top.equalTo(oneView.snp.bottom).offset(-50)
+            make.left.right.bottom.equalTo(0)
+        }
         
+        
+        weak var weakSelf = self;
         self.dateSelectView.selectedDateCallback { (year, month) in
-            self.loadData()
+            weakSelf?.loadData()
+        }
+         
+        self.dateSelectView.selectYearCallback { (year) in
+           weakSelf?.dateSelectView.setDate(year: 2016, month: 7)
         }
         
     }
