@@ -17,6 +17,4 @@ class Summary: NSObject {
     var tallytype: Int = 0
     var summarytype: Int = 0
     
-
-    
 }

@@ -66,6 +66,7 @@
 		13F1673E22377CD20018E908 /* MyBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1673D22377CD20018E908 /* MyBtn.swift */; };
 		5578B761E51E9BBDBF38D452 /* Pods_tally.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26979D66EE8C53092435A99 /* Pods_tally.framework */; };
 		B6162CEF229796F2004F4EC7 /* ReportFormsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6162CEE229796F2004F4EC7 /* ReportFormsModel.swift */; };
+		B6165A6622B0CFA30037A6AA /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6165A6522B0CFA30037A6AA /* ListViewController.swift */; };
 		B61D841522954FB6004ABF48 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D841422954FB6004ABF48 /* SelectView.swift */; };
 		B61FE9202293BFF100E244E2 /* ReportFormsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE91F2293BFF000E244E2 /* ReportFormsView.swift */; };
 		B61FE9222293C66800E244E2 /* ReportFormsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE9212293C66800E244E2 /* ReportFormsTableViewCell.swift */; };
@@ -73,6 +74,10 @@
 		B61FE9262293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FE9252293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift */; };
 		B620DBF822A8EEE9007A479D /* DateSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620DBF722A8EEE9007A479D /* DateSelectView.swift */; };
 		B6213D61228C3DB000DB275D /* ReportFormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6213D60228C3DB000DB275D /* ReportFormsViewController.swift */; };
+		B6F2303022AE1DD400C5D413 /* DateShowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2302E22AE1DD400C5D413 /* DateShowCollectionViewCell.swift */; };
+		B6F2303122AE1DD400C5D413 /* DateShowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F2302F22AE1DD400C5D413 /* DateShowCollectionViewCell.xib */; };
+		B6F2303522AE240E00C5D413 /* DateShowCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2303422AE240E00C5D413 /* DateShowCollectionViewFlowLayout.swift */; };
+		B6F2303722AE47D900C5D413 /* DateShowLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2303622AE47D900C5D413 /* DateShowLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +144,7 @@
 		473828AB58C467331F7C001C /* Pods-tally.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tally.release.xcconfig"; path = "Pods/Target Support Files/Pods-tally/Pods-tally.release.xcconfig"; sourceTree = "<group>"; };
 		B26979D66EE8C53092435A99 /* Pods_tally.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tally.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6162CEE229796F2004F4EC7 /* ReportFormsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsModel.swift; sourceTree = "<group>"; };
+		B6165A6522B0CFA30037A6AA /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		B61D841422954FB6004ABF48 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		B61FE91F2293BFF000E244E2 /* ReportFormsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportFormsView.swift; sourceTree = "<group>"; };
 		B61FE9212293C66800E244E2 /* ReportFormsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsTableViewCell.swift; sourceTree = "<group>"; };
@@ -146,6 +152,10 @@
 		B61FE9252293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsDateSelectTableViewCell.swift; sourceTree = "<group>"; };
 		B620DBF722A8EEE9007A479D /* DateSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectView.swift; sourceTree = "<group>"; };
 		B6213D60228C3DB000DB275D /* ReportFormsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsViewController.swift; sourceTree = "<group>"; };
+		B6F2302E22AE1DD400C5D413 /* DateShowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateShowCollectionViewCell.swift; sourceTree = "<group>"; };
+		B6F2302F22AE1DD400C5D413 /* DateShowCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateShowCollectionViewCell.xib; sourceTree = "<group>"; };
+		B6F2303422AE240E00C5D413 /* DateShowCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateShowCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		B6F2303622AE47D900C5D413 /* DateShowLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateShowLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -548,6 +558,8 @@
 			children = (
 				B61FE9252293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift */,
 				B61FE9212293C66800E244E2 /* ReportFormsTableViewCell.swift */,
+				B6F2302E22AE1DD400C5D413 /* DateShowCollectionViewCell.swift */,
+				B6F2302F22AE1DD400C5D413 /* DateShowCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -556,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				B6213D60228C3DB000DB275D /* ReportFormsViewController.swift */,
+				B6165A6522B0CFA30037A6AA /* ListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -563,13 +576,31 @@
 		B6213D5F228C170400DB275D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B6F2303322AE23E100C5D413 /* Layout */,
+				B6F2303222AE1DDC00C5D413 /* Others */,
 				B61FE9272293ECEF00E244E2 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B6F2303222AE1DDC00C5D413 /* Others */ = {
+			isa = PBXGroup;
+			children = (
 				B61FE91F2293BFF000E244E2 /* ReportFormsView.swift */,
 				B61FE9232293E70000E244E2 /* ReportFormsDateSelectView.swift */,
 				B61D841422954FB6004ABF48 /* SelectView.swift */,
 				B620DBF722A8EEE9007A479D /* DateSelectView.swift */,
+				B6F2303622AE47D900C5D413 /* DateShowLabel.swift */,
 			);
-			path = View;
+			path = Others;
+			sourceTree = "<group>";
+		};
+		B6F2303322AE23E100C5D413 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				B6F2303422AE240E00C5D413 /* DateShowCollectionViewFlowLayout.swift */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 		C5C30DD9C929A00E5A923BD2 /* Pods */ = {
@@ -654,6 +685,7 @@
 				13D5C6F9223D3BCE005FC8BB /* 汉仪细行楷简.ttf in Resources */,
 				133E7BD0222F96B4004D79CC /* LaunchScreen.storyboard in Resources */,
 				133E7BCD222F96B4004D79CC /* Assets.xcassets in Resources */,
+				B6F2303122AE1DD400C5D413 /* DateShowCollectionViewCell.xib in Resources */,
 				1392E50B223B9969007A4C59 /* ConsumeType.plist in Resources */,
 				13E68FAA223C83150060B106 /* IncomeType.plist in Resources */,
 				133E7BC8222F96B3004D79CC /* Main.storyboard in Resources */,
@@ -715,6 +747,7 @@
 				13E68FB7223CEEB40060B106 /* User.swift in Sources */,
 				B61FE9222293C66800E244E2 /* ReportFormsTableViewCell.swift in Sources */,
 				13088175224B766800E9CFC3 /* RefreshComponent.swift in Sources */,
+				B6F2303722AE47D900C5D413 /* DateShowLabel.swift in Sources */,
 				1303C8D72240B75100C7D701 /* Summary.swift in Sources */,
 				13B60E582239117300A72CBC /* RemarkView.swift in Sources */,
 				1323E3D122366C54008AE30E /* ConsumeTypeView.swift in Sources */,
@@ -724,12 +757,14 @@
 				1368F497223E80630053CF28 /* Details_scrollViewItem.swift in Sources */,
 				13088173224B757000E9CFC3 /* HeaderRefreshComponent.swift in Sources */,
 				B6162CEF229796F2004F4EC7 /* ReportFormsModel.swift in Sources */,
+				B6F2303522AE240E00C5D413 /* DateShowCollectionViewFlowLayout.swift in Sources */,
 				1392E510223BAE17007A4C59 /* TallyModel.swift in Sources */,
 				B6213D61228C3DB000DB275D /* ReportFormsViewController.swift in Sources */,
 				13A1E3E62241E84400AE9FAD /* DetailsTopView_DateShowView.swift in Sources */,
 				133E7BDC222F9BED004D79CC /* TabBarViewController.swift in Sources */,
 				13D5C6F4223D354F005FC8BB /* Details_TopView.swift in Sources */,
 				130EB565223F8A0000963016 /* CalendarHelper.swift in Sources */,
+				B6F2303022AE1DD400C5D413 /* DateShowCollectionViewCell.swift in Sources */,
 				133E7BDF222F9D82004D79CC /* CustomTabBar.swift in Sources */,
 				13B60E512238FA1300A72CBC /* SelectDateView.swift in Sources */,
 				13E68FAF223CB7C40060B106 /* SqlManager.swift in Sources */,
@@ -745,6 +780,7 @@
 				1308816E224B22A000E9CFC3 /* LightRefresh.swift in Sources */,
 				B61FE9262293ECE500E244E2 /* ReportFormsDateSelectTableViewCell.swift in Sources */,
 				133E7BCB222F96B3004D79CC /* tally.xcdatamodeld in Sources */,
+				B6165A6622B0CFA30037A6AA /* ListViewController.swift in Sources */,
 				13E68FBB223CFD170060B106 /* TallyList.swift in Sources */,
 				133E7BE4222FA81A004D79CC /* Common.swift in Sources */,
 				133E7BE8222FAE22004D79CC /* HomeViewController.swift in Sources */,

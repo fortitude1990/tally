@@ -149,7 +149,7 @@ class Details_scrollViewItem: UIView, UITableViewDelegate, UITableViewDataSource
     
      // MARK: - Methods
     
-    @discardableResult func deleteRow(indexPath: IndexPath){
+     func deleteRow(indexPath: IndexPath){
         
         let array: [TallyList] = self.dataArray.object(at: indexPath.section) as! Array
         let tallyModel: TallyList = array[indexPath.row]

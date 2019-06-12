@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSource {
 
     /*
@@ -17,6 +18,8 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
         // Drawing code
     }
     */
+   static let years: Int = 120
+
     
     
     
@@ -28,7 +31,8 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
     var dataArray: Array<Any>?
     var animatedflag: Bool = true
     var handler: ((NSInteger, NSInteger) ->Void)?
-    var selectYearCallback: ((NSInteger)->Void)?
+    var selectYearCallback: ((NSInteger, NSInteger)->Void)?
+    
     
     var _year: NSInteger = 2019
     var year: NSInteger {
@@ -154,7 +158,11 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
     func setDate(year: NSInteger, month: NSInteger) -> Void {
         
         if month == 0{
+            
             self.tableView.isHidden = true
+            _month = month
+            self.year = year
+            
         }else{
             self.tableView.isHidden = false
             
@@ -192,7 +200,7 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
         
     }
     
-    func selectYearCallback(callback: @escaping (NSInteger)->Void) -> Void {
+    func selectYearCallback(callback: @escaping (NSInteger, NSInteger)->Void) -> Void {
         self.selectYearCallback = callback;
     }
     
@@ -213,8 +221,9 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
     }
     
     @objc private func tapGestureAction(tap: UITapGestureRecognizer){
+        self.tableView.isHidden = true
         if self.selectYearCallback != nil{
-            self.selectYearCallback?(self.year);
+            self.selectYearCallback?(self.year, self.month);
         }
     }
     
@@ -308,7 +317,7 @@ class ReportFormsDateSelectView: UIView, UITableViewDelegate, UITableViewDataSou
     //MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 15
+        return ReportFormsDateSelectView.years
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

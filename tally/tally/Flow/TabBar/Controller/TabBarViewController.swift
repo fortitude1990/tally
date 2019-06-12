@@ -101,8 +101,6 @@ class TabBarViewController: UITabBarController, AddViewControllerDelegate {
                     self.selectedIndex = 0
                     let tabBarItem: UITabBarItem = self.customTabBar?.items?[0] ?? UITabBarItem.init()
                     self.customTabBar?.selectedItem = tabBarItem
-                    
-
                 }
             }else{
                 print("list数据插入失败")

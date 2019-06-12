@@ -19,7 +19,7 @@ class TallyTable: NSObject {
     let REMARK = Expression<String?>("remark")
     let CONSUMETYPE = Expression<String>("consumetype")
     let TALLYTYPE = Expression<Int>("tallytype")
-    
+
     func create() -> Bool {
         do {
             
@@ -53,6 +53,7 @@ class TallyTable: NSObject {
             return false
         }
     }
+    
     
     func update(record tally: TallyList) -> Bool {
         do {
@@ -189,6 +190,9 @@ class TallyTable: NSObject {
         }
     }
     
+    func associatedSummary(yearlyID: Int64, monthlyID: Int64) -> Bool {
+        return false
+    }
 }
 
 

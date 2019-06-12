@@ -27,13 +27,16 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
     var reportFormsView: ReportFormsView? = nil
     var date: String{
         get{
+            if self.dateSelectView.month == 0{
+                return  String(format: "%d", self.dateSelectView.year)
+            }
             return  String(format: "%d%02d", self.dateSelectView.year, self.dateSelectView.month)
         }
     }
     var type: TallyType = TallyType.monthlySpending
-    var summaryType: SummaryType = SummaryType.month
+//    var summaryType: SummaryType = SummaryType.month
     var list: Array<ReportFormsModel> = Array.init()
-
+    var summary: Summary?
     
     //MARK: - Lazy
     
@@ -74,6 +77,12 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
         aTableView.tableHeaderView = headerView
         aTableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 30))
         
+        let backView: UIView = UIView.init()
+        backView.backgroundColor = UIColor.white
+        headerView.addSubview(backView)
+        backView.frame = CGRect.init(x: 0, y: 50, width: kScreenWidth, height: headerView.bounds.height - 50)
+        
+        
         let formsView: UIView = UIView.init()
         formsView.backgroundColor = UIColor.white
         formsView.layer.cornerRadius = 4
@@ -82,6 +91,10 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
         formsView.layer.shadowOpacity = 1
         headerView.addSubview(formsView)
         formsView.frame = CGRect.init(x: 15, y: 15, width: kScreenWidth - 15 * 2, height: headerView.bounds.height - 15 * 2)
+        
+        
+        
+        
 
         self.reportFormsView = ReportFormsView.init(frame: CGRect.init(x: 0, y: 80, width: formsView.frame.width, height: formsView.frame.height - 70 - 10))
         formsView.addSubview(self.reportFormsView ?? UIView.init())
@@ -97,11 +110,17 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
             weakSelf?.incomeSelectView.isSelected = false
             weakSelf?.spendingSelectView.isSelected = true
             
-            if weakSelf?.summaryType == SummaryType.month{
+            
+            if weakSelf?.type == TallyType.monthlyIncome{
                 weakSelf?.type = TallyType.monthlySpending
+            }else if weakSelf?.type == TallyType.monthlySpending{
+                weakSelf?.type = TallyType.monthlySpending
+            }else if weakSelf?.type == TallyType.yearlyIncome{
+                weakSelf?.type = TallyType.yearlySpending
             }else{
                 weakSelf?.type = TallyType.yearlySpending
             }
+            
             weakSelf?.loadData()
             
         })
@@ -110,15 +129,19 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
             weakSelf?.incomeSelectView.isSelected = true
             weakSelf?.spendingSelectView.isSelected = false
             
-            if weakSelf?.summaryType == SummaryType.month{
+            if weakSelf?.type == TallyType.monthlySpending{
                 weakSelf?.type = TallyType.monthlyIncome
+            }else if weakSelf?.type == TallyType.monthlyIncome{
+                weakSelf?.type = TallyType.monthlyIncome
+            }else if weakSelf?.type == TallyType.yearlySpending{
+                weakSelf?.type = TallyType.yearlyIncome
             }else{
                 weakSelf?.type = TallyType.yearlyIncome
             }
+            
             weakSelf?.loadData()
         })
 
-        
         return aTableView
     }()
     
@@ -201,15 +224,68 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
             make.top.equalTo(oneView.snp.bottom).offset(-50)
             make.left.right.bottom.equalTo(0)
         }
-        
+        self.quickDateSelectView.isHidden = true
         
         weak var weakSelf = self;
         self.dateSelectView.selectedDateCallback { (year, month) in
+            
+            if month == 0{
+                if self.type == .yearlySpending{
+                    self.type = .yearlySpending
+                }else if self.type == .monthlySpending{
+                    self.type = .yearlySpending
+                }else if self.type == .yearlyIncome{
+                    self.type = .yearlyIncome
+                }else{
+                    self.type = .yearlyIncome
+                }
+            }else{
+                if self.type == .yearlySpending{
+                    self.type = .monthlySpending
+                }else if self.type == .monthlySpending{
+                    self.type = .monthlySpending
+                }else if self.type == .yearlyIncome{
+                    self.type = .monthlyIncome
+                }else{
+                    self.type = .monthlyIncome
+                }
+            }
             weakSelf?.loadData()
         }
          
-        self.dateSelectView.selectYearCallback { (year) in
-           weakSelf?.dateSelectView.setDate(year: 2016, month: 7)
+        self.dateSelectView.selectYearCallback { (year, month) in
+            
+            if weakSelf?.quickDateSelectView.isHidden == false{
+                weakSelf?.quickDateSelectView.dismiss()
+                if month != 0{
+                    weakSelf?.dateSelectView.tableView.isHidden = false
+                }
+            }else{
+                weakSelf?.quickDateSelectView.show(year: year, month: month)
+            }
+            
+        }
+        
+        self.quickDateSelectView.showYear { (year) in
+            weakSelf?.dateSelectView.yearLabel?.text = String(format: "%d年", year)
+        }
+        
+        self.quickDateSelectView.didSelected { (year, month) in
+            weakSelf?.dateSelectView.setDate(year: year, month: month)
+            
+            if month == 0{
+                weakSelf?.spendingSelectView.titleLabel.text = "年支出"
+                weakSelf?.incomeSelectView.titleLabel.text = "年收入"
+            }else{
+                weakSelf?.spendingSelectView.titleLabel.text = "月支出"
+                weakSelf?.incomeSelectView.titleLabel.text = "月收入"
+            }
+        }
+        
+        self.quickDateSelectView.cancel { (year, month) in
+            if month != 0{
+                weakSelf?.dateSelectView.tableView.isHidden = false
+            }
         }
         
     }
@@ -243,7 +319,7 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
                 incomeSummary =  sqlManager.query(userid: "00000000", tallyType: 2, summaryType: 2, date: date) ?? Summary.init()
                 break
             case .yearlyIncome:
-                incomeSummary =  sqlManager.query(userid: "00000000", tallyType: 2, summaryType: 2, date: date) ?? Summary.init()
+                spendingSummary =  sqlManager.query(userid: "00000000", tallyType: 1, summaryType: 2, date: date) ?? Summary.init()
                 incomeSummary =  sqlManager.query(userid: "00000000", tallyType: 2, summaryType: 2, date: date) ?? Summary.init()
                 break
         }
@@ -257,6 +333,7 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
         }else{
             summary = spendingSummary
         }
+        self.summary = summary
         
         let array: Array<ConsumeType> = sqlManager.consumetype_query(pid: summary?.id ?? 0)
         let sortArray: Array<ConsumeType> = array.sorted { (now: ConsumeType, last: ConsumeType) -> Bool in
@@ -269,7 +346,6 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
         self.list.removeAll()
         var reportFormsViewParams: Array<Any> = Array.init()
         var angle: Double = self.reportFormsView?.startAngle ?? -180.00
-        var otherScale: Double = 0.00
         for consumeType: ConsumeType in sortArray{
             
             if Double.init(consumeType.keyValue ?? "") == 0.00{
@@ -299,9 +375,17 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
             
             let endAngle: Double = angle - scale * 360
             
-            let value1: UInt32 = arc4random() % 255
-            let value2: UInt32 = arc4random() % 150
-            let value3: UInt32 = arc4random() % 150
+            var value1: UInt32 = arc4random() % 255
+            var value2: UInt32 = arc4random() % 255
+            let value3: UInt32 = arc4random() % 255
+            if type == .monthlyIncome || type == .yearlyIncome{
+//                value1 = arc4random() % 100
+                value2 = arc4random() % (255 - 180) + 180
+            }else{
+                value1 = arc4random() % (255 - 180) + 180
+//                value2 = arc4random() % 100
+            }
+            
             let color: UIColor = UIColor.init(red: CGFloat(value1) / 255.0, green: CGFloat(value2) / 255.0, blue: CGFloat(value3) / 255.0, alpha: 1.0)
             
             let text: String = String(format: "%@ %d%%", consumeType.keyName ?? "", lroundf(Float(Double.init(scale * 100))))
@@ -345,12 +429,25 @@ class ReportFormsViewController: UIViewController, UITableViewDelegate, UITableV
         self.reportFormsView?.params = reportFormsViewParams
         self.tableView.reloadData()
         
-        
     }
     //MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let reportFormsModel: ReportFormsModel = list[indexPath.row]
+
+        let listVC: ListViewController = ListViewController.init()
+        listVC.hidesBottomBarWhenPushed = true
+        listVC.consumeType = reportFormsModel.consumeType
+        listVC.summary = self.summary
+        self.navigationController?.pushViewController(listVC, animated: true)
+        
     }
     
     //MARK: - UITableViewDataSource
