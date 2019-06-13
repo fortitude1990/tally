@@ -12,14 +12,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     //MARK: - Property
     private let identifier = "identifier"
+    private let headerIdentifier = "headerIdentifier"
     private lazy var tableView: UITableView = {
         let aTableView: UITableView = UITableView.init(frame: CGRect.zero, style: UITableView.Style.plain)
         aTableView.delegate = self
         aTableView.dataSource = self
         aTableView.tableFooterView = UIView.init()
         aTableView.tableHeaderView = UIView.init()
+        aTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         aTableView.register(Details_ListTableViewCell.classForCoder(), forCellReuseIdentifier: identifier)
-
+        aTableView.register(ListHeaderView.classForCoder(), forHeaderFooterViewReuseIdentifier: self.headerIdentifier)
         return aTableView
     }()
     var consumeType: ConsumeType?
@@ -87,12 +89,45 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         let array: Array<TallyList> = sqlManager.tallylist_query(startDate: startDate, endDate: endDate, userid: summary?.userid ?? "00000000")
+        
+        var listArray: Array<Any> = Array.init()
+        
+        var myArray: Array<TallyList> = Array.init()
+        var last: TallyList?
         self.dataArray.removeAll()
         for tally: TallyList in array {
             if tally.consumeType == self.consumeType?.keyName{
-                self.dataArray.append(tally)
+                
+                if last == nil{
+                    myArray.append(tally)
+                }else{
+                    if tally.date == last?.date{
+                        myArray.append(tally)
+                    }else{
+                        listArray.append(myArray)
+                        myArray = Array.init()
+                        myArray.append(tally)
+                    }
+                }
+                last = tally
             }
         }
+        listArray.append(myArray)
+        
+
+        
+      self.dataArray =  listArray.sorted { (now, last) -> Bool in
+        
+            let one = (now as! Array<TallyList>).first?.date
+            let two = (last as! Array<TallyList>).first?.date
+        
+            if Int.init(one ?? "") ?? 1 > Int.init(two ?? "") ?? 0{
+                return true
+            }
+            return false
+        
+        }
+        
         
         self.tableView.reloadData()
     }
@@ -104,10 +139,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 50
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let tally: TallyList = self.dataArray[indexPath.row] as! TallyList
+        let array: Array<Any> = self.dataArray[indexPath.section] as! Array
+        let tally: TallyList = array[indexPath.row] as! TallyList
         let billingDetailsVC = BillingDetailsViewController.init()
         billingDetailsVC.hidesBottomBarWhenPushed = true
         billingDetailsVC.tallyModel = tally
@@ -130,13 +169,33 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - UITableViewDataSource
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.dataArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let array: Array<Any> = self.dataArray[section] as! Array
+        return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: Details_ListTableViewCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Details_ListTableViewCell
-        cell.tallyModel = self.dataArray[indexPath.row] as! TallyList
+        let array: Array<Any> = self.dataArray[indexPath.section] as! Array
+        cell.tallyModel = array[indexPath.row] as! TallyList
+        if indexPath.row == array.count - 1{
+            cell.isHiddenSeparateLine = true
+        }else{
+            cell.isHiddenSeparateLine = false
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: ListHeaderView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerIdentifier) as! ListHeaderView
+        let array: Array<Any> = self.dataArray[section] as! Array
+        let tally: TallyList = array.first as! TallyList
+        let dateString: String = CalendarHelper.dateString(date: tally.date ?? "20190101", originFromat: "yyyyMMdd", resultFromat: "yyyy年MM月dd日")
+        headerView.contentLabel?.text = dateString
+        return headerView
     }
 }

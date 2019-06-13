@@ -71,6 +71,15 @@ class DetailsTopView_DateShowView: UIView {
             make.centerY.equalTo(self)
         }
         
+        let line: UIView = UIView.init()
+        line.backgroundColor = UIColor.black
+        self.addSubview(line)
+        line.snp.makeConstraints { (make) in
+            make.right.equalTo(-10)
+            make.height.equalTo(20)
+            make.width.equalTo(0.5)
+            make.centerY.equalTo(self)
+        }
     }
     
 }
