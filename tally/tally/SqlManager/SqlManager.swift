@@ -191,7 +191,6 @@ class SqlManager: NSObject {
         }
         
         return result
-        
     }
     
     func query(userid: String, tallyType: Int, summaryType: Int, date: String) -> Summary? {

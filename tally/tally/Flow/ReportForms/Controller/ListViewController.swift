@@ -112,9 +112,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 last = tally
             }
         }
-        listArray.append(myArray)
         
-
+        if myArray.count > 0{
+            listArray.append(myArray)
+        }
         
       self.dataArray =  listArray.sorted { (now, last) -> Bool in
         
@@ -130,6 +131,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         self.tableView.reloadData()
+
     }
     
     

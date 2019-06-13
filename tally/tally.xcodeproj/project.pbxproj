@@ -77,6 +77,8 @@
 		B6213D61228C3DB000DB275D /* ReportFormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6213D60228C3DB000DB275D /* ReportFormsViewController.swift */; };
 		B665789522B1F78A0017573C /* timg (1).jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B665789422B1F78A0017573C /* timg (1).jpeg */; };
 		B665789722B1F7900017573C /* timg (2).jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B665789622B1F7900017573C /* timg (2).jpeg */; };
+		B665789C22B22F1E0017573C /* FoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665789B22B22F1E0017573C /* FoundViewController.swift */; };
+		B665789E22B22F2F0017573C /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665789D22B22F2F0017573C /* MineViewController.swift */; };
 		B6F2303022AE1DD400C5D413 /* DateShowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2302E22AE1DD400C5D413 /* DateShowCollectionViewCell.swift */; };
 		B6F2303122AE1DD400C5D413 /* DateShowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F2302F22AE1DD400C5D413 /* DateShowCollectionViewCell.xib */; };
 		B6F2303522AE240E00C5D413 /* DateShowCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2303422AE240E00C5D413 /* DateShowCollectionViewFlowLayout.swift */; };
@@ -158,6 +160,8 @@
 		B6213D60228C3DB000DB275D /* ReportFormsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormsViewController.swift; sourceTree = "<group>"; };
 		B665789422B1F78A0017573C /* timg (1).jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "timg (1).jpeg"; sourceTree = "<group>"; };
 		B665789622B1F7900017573C /* timg (2).jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "timg (2).jpeg"; sourceTree = "<group>"; };
+		B665789B22B22F1E0017573C /* FoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundViewController.swift; sourceTree = "<group>"; };
+		B665789D22B22F2F0017573C /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		B6F2302E22AE1DD400C5D413 /* DateShowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateShowCollectionViewCell.swift; sourceTree = "<group>"; };
 		B6F2302F22AE1DD400C5D413 /* DateShowCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateShowCollectionViewCell.xib; sourceTree = "<group>"; };
 		B6F2303422AE240E00C5D413 /* DateShowCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateShowCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -261,6 +265,8 @@
 		133E7BD8222F9B4B004D79CC /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				B665789922B22E700017573C /* Mine */,
+				B665789822B22E660017573C /* Found */,
 				136C19D3224DBC4700E7D2D2 /* ReportForms */,
 				134613502230B73100E9136E /* Add */,
 				133E7BE5222FADED004D79CC /* Home */,
@@ -608,6 +614,38 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		B665789822B22E660017573C /* Found */ = {
+			isa = PBXGroup;
+			children = (
+				B665789A22B22F030017573C /* Controller */,
+			);
+			path = Found;
+			sourceTree = "<group>";
+		};
+		B665789922B22E700017573C /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				B665789F22B2351E0017573C /* Controller */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		B665789A22B22F030017573C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B665789B22B22F1E0017573C /* FoundViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B665789F22B2351E0017573C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B665789D22B22F2F0017573C /* MineViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		B6F2303222AE1DDC00C5D413 /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -795,6 +833,7 @@
 				B6F2303022AE1DD400C5D413 /* DateShowCollectionViewCell.swift in Sources */,
 				133E7BDF222F9D82004D79CC /* CustomTabBar.swift in Sources */,
 				13B60E512238FA1300A72CBC /* SelectDateView.swift in Sources */,
+				B665789C22B22F1E0017573C /* FoundViewController.swift in Sources */,
 				13E68FAF223CB7C40060B106 /* SqlManager.swift in Sources */,
 				13E68FB1223CCA720060B106 /* UsersTable.swift in Sources */,
 				134613532230B75000E9136E /* AddViewController.swift in Sources */,
@@ -827,6 +866,7 @@
 				13088171224B455800E9CFC3 /* FooterRefreshComponent.swift in Sources */,
 				134613562230C38D00E9136E /* AddTopView.swift in Sources */,
 				B61D841522954FB6004ABF48 /* SelectView.swift in Sources */,
+				B665789E22B22F2F0017573C /* MineViewController.swift in Sources */,
 				13B60E542238FD5A00A72CBC /* TodayView.swift in Sources */,
 				1368F499223E83AD0053CF28 /* Details_ListTableViewCell.swift in Sources */,
 				13838E2522326895007934E0 /* ConsumeTypeCollectionViewCell.swift in Sources */,
