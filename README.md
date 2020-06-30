@@ -28,7 +28,7 @@
 
 <div>
   <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/tally%E5%8A%A8%E7%94%BB.gif" 
+       src = "http://kan.027cgb.com/630909/tally%E5%8A%A8%E7%94%BB.gif" 
        width = "25%" 
        alt = "账单列表"/>
 </div>
