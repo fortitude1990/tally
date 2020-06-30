@@ -7,9 +7,9 @@
 ## 第三方框架
 * [SnapKit](https://github.com/SnapKit/SnapKit)
 * [SQLite.swift](https://github.com/stephencelis/SQLite.swift)
+![add image](https://github.com/fortitude1990/tally/blob/master/images/2.0/WechatIMG4.jpeg)
 
 ## 截图
-
 <div>
   <img style="float:left margin:20" 
        src = "https://github.com/fortitude1990/tally/blob/master/images/2.0/WechatIMG4.jpeg" 
