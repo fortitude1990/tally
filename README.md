@@ -7,6 +7,8 @@
 ## 第三方框架
 * [SnapKit](https://github.com/SnapKit/SnapKit)
 * [SQLite.swift](https://github.com/stephencelis/SQLite.swift)
+## 测试
+![好看的图片](../images/2.0/WechatIMG4.jpeg)
 
 ## 截图
 <div>
