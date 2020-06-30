@@ -11,15 +11,15 @@
 ## 截图
 <div>
   <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/2.0/WechatIMG4.jpeg" 
+       src = "http://kan.027cgb.com/630909/WechatIMG5.jpeg" 
        width = "25%" 
        alt = "账单列表"/>
     <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/2.0/WechatIMG5.jpeg" 
+       src = "http://kan.027cgb.com/630909/WechatIMG6.jpeg" 
        width = "25%" 
        alt = "详情"/>
     <img style="float:left margin:20" 
-       src = "https://github.com/fortitude1990/tally/blob/master/images/2.0/WechatIMG6.jpeg" 
+       src = "http://kan.027cgb.com/630909/WechatIMG4.jpeg" 
        width = "25%" 
        alt = "添加"/>
 </div>
