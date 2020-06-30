@@ -7,8 +7,6 @@
 ## 第三方框架
 * [SnapKit](https://github.com/SnapKit/SnapKit)
 * [SQLite.swift](https://github.com/stephencelis/SQLite.swift)
-## 测试
-![好看的图片](https://img-blog.csdn.net/20181018180531374?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI0NjAwODQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 ## 截图
 <div>
